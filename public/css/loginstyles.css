@@ -77,8 +77,8 @@ button:hover {
 .options {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
+    align-items: left;
+    font-size: 200px;
     color: #d1d1d1;
     margin-top: 10px;
 }

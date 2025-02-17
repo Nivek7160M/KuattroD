@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
@@ -44,40 +46,16 @@
             <div class="login-container">
                 <div class="login-box">
                     <h2>Iniciar Sesión</h2>
-                    <form action="iniciojefe.html" method="GET">
+                    <form action="inicio.html" method="GET">
                         <input type="text" id="usuario" name="usuario"  placeholder="Usuario" pattern="^[A-Z]+$" title="El Usuario solo debe contener letras MAYUSCULAS">
                         <input type="password" id="contraseña" name="password" required placeholder="Contraseña">
                         <div class="options">
+                            <button class="btn mostrar"><img src="public/imagenes/candado-abierto.png" width="20" alt="20" class="btn mostrar"></button>
                         </div>
                         <button type="submit">Iniciar Sesión</button>
                         <p>¿No tienes una cuenta? <a href="CrearUsuario.html">Registrarse</a>
                              <a href="#">¿Olvidaste tu contraseña?</a>
                              <p><div id="container"></div>
-                                <script>
-                                  // Crear el botón
-                                 let button = document.createElement('button');
-                                  button.classList.add('button'); // Añadir clase para estilos adicionales si es necesario
-                                  button.style.width = '12px';
-                                  button.style.height = '12px';
-                              
-                                  // Asignar el fondo con una imagen
-                                  button.style.backgroundImage = "url(imagenes/candado-abierto.png)";
-                                  button.style.backgroundSize = 'cover'; // Asegura que la imagen cubra el área del botón
-                                  button.style.backgroundPosition = 'center'; // Centra la imagen en el botón
-                              
-                                  // Añadir texto al botón si es necesario
-                                 // button.innerHTML = 'Click Me';
-                              
-                                  // Añadir el botón al contenedor
-                                  document.getElementById('container').appendChild(button);
-                                  let inputField = document.getElementById('usuario');
-                                  let toggleButton = document.getElementById('button');
-                                  toggleButton.onclick=function(){
-                                    if (inputField.type == "password"){
-                                        inputField.type = "Texto"
-                                    }
-                                  }
-                                </script>
                               </p>
                         </div>
                         </p>
