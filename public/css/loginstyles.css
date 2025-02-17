@@ -17,8 +17,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 100%;
+    width: 10;
+    height: 10%;
     background-color: transparent; /* Fondo semitransparente */
     padding: 20px;
 }
@@ -108,7 +108,7 @@ p a:hover {
     text-decoration: underline;
 }
 
-.options {
+.option {
     display: flex;
     align-items: center;
     justify-content: flex-start; /* Alineación a la izquierda */

@@ -77,3 +77,11 @@
     color: red;
     margin-right: 10px;
 }
+.btn-mostrar{
+    background-color: #0fed13;
+    border: none;
+    color: #e6e6e6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
