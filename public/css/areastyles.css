@@ -1,0 +1,79 @@
+/* Estilos para la tabla */
+.table-container {
+    margin: 20px auto;
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table-container th {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.table-container tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.table-container tr:hover {
+    background-color: #ddd;
+}
+
+/* Botón para imprimir */
+.print-btn {
+    position: right;
+    margin: 20px 0;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #31932c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+
+.print-btn:hover {
+    background-color: #0056b3;
+}
+
+.print-btn:active {
+    background-color: #00408d;
+}
+
+/* Estilos para impresión */
+@media print {
+    body * {
+        visibility: hidden; /* Oculta todos los elementos */
+    }
+    .bitacora-table, 
+    .bitacora-table * {
+        visibility: visible; /* Muestra solo la tabla */
+    }
+    .bitacora-table {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+} 
+.showPassword{
+    font-size: 100px;
+    color: red;
+    margin-right: 10px;
+}

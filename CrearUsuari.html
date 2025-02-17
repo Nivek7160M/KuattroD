@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+</head>
+
+<body>
+
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()"></button>
+            <a href="index.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <div class="user-menu">
+                </div>
+            </div>    
+        </div>
+    </header>
+
+    <!-- Menú lateral -->
+    
+
+    <!-- Todo lo que vayan a agregar -->
+    <main class="main-content" id="mainContent">
+        <div class="form-container">
+            <h2>Crear Usuario</h2>
+            <form action="inicioempleados.html" method="GET">
+
+                <label for="username">Usuario:</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="fullname">Primer Nombre:</label>
+                <input type="text" id="fullname" name="fullname" required>
+
+                <label for="fullname">Segundo Nombre :</label>
+                <input type="text" id="fullname" name="fullname" >
+
+                <label for="fullname">Primer Apellido:</label>
+                <input type="text" id="fullname" name="fullname" required>
+
+                <label for="fullname">Segundo Apellido:</label>
+                <input type="text" id="fullname" name="fullname" >
+
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="hireDate">Fecha de Contratación:</label>
+                <input type="date" id="hireDate" name="hireDate" required>
+
+                <label for="personalPhone">Teléfono Personal:</label>
+                <input type="text" id="personalPhone" name="personalPhone" required>
+
+                <label for="corporatePhone">Teléfono Corporativo:</label>
+                <input type="text" id="corporatePhone" name="corporatePhone" >
+
+                <label for="personalEmail">Correo Personal:</label>
+                <input type="email" id="personalEmail" name="personalEmail" >
+
+                <label for="corporateEmail">Correo Corporativo:</label>
+                <input type="email" id="corporateEmail" name="corporateEmail" required>
+
+                <label for="departmentHead">Jefe de Departamento:</label>
+                <input type="text" id="departmentHead" name="departmentHead" required>
+
+                <label for="branch">Sucursal:</label>
+                <input type="text" id="branch" name="branch" required>
+
+
+                <button type="submit">Crear Usuario</button>
+            
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContent = document.getElementById('mainContent');
+            sideMenu.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.classList.toggle('show');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-button')) {
+                const dropdowns = document.getElementsByClassName('user-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterUsers() {
+            const input = document.getElementById('searchBar');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('userTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = found ? '' : 'none';
+            }
+        }
+    </script>
+
+
+
+
+    <!-- Pie de página común -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

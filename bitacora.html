@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitácora</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+  
+</head>
+<body>
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="mantenimiento.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <div class="user-menu">
+                <button class="user-button" onclick="toggleUserMenu()">👤</button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="perfilmantenimiento.html">Perfil</a>
+                    <a href="cambiarcontraseñarecurso.html">Cambiar contraseña</a>
+                    <a href="index.html">Cerrar Sesión</a>
+                </div>
+            </div>    
+        </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+        <nav>
+            <ul>
+                <li><a href="usuarioyseguridad.html">Usuarios y Seguridad</a></li>
+                <li><a href="backup.html">Recuperacion y restauracion </a></li>
+                <li><a href="area.html">Areas y Cargos </a></li>
+                <li><a href="bitacora.html">Historial y Auditoria </a></li>
+                <li><a href="parametros.html">Parametros</a></li>
+                <li><a href="nosotrosmantenimiento.html">Nosotros</a></li>
+                <li><a href="contactomantenimiento.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido principal de la página -->
+    <main class="main-content" id="mainContent">
+        <h1>Bitácora de Actividades</h1>
+
+        <!-- Tabla de bitácora -->
+        <table class="bitacora-table" id="bitacoraTable">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Usuario</th>
+                    <th>Acción</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2024-12-05</td>
+                    <td>Juan Pérez</td>
+                    <td>Inicio sesión</td>
+                    <td></td>
+                    <td><button class="btn-agregar">Agregar</button></td>
+                </tr>
+                <tr>
+                    <td>2024-12-04</td>
+                    <td>Ana García</td>
+                    <td>Cambio de contraseña</td>
+                    <td></td>
+                    <td><button class="btn-agregar">Agregar</button></td>
+                </tr>
+                <!-- Más registros aquí -->
+            </tbody>
+        </table>
+        <button class="btn-imprimir" onclick="imprimirBitacora()">Imprimir Bitácora</button>
+
+        
+    </main>
+
+    <script>
+        
+
+        // Función para alternar el menú lateral
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContent = document.getElementById('mainContent');
+            sideMenu.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+
+        // Función para alternar el menú de usuario
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.classList.toggle('show');
+        }
+
+        // Ocultar el menú de usuario al hacer clic fuera
+        window.onclick = function (event) {
+            if (!event.target.matches('.user-button')) {
+                const dropdowns = document.getElementsByClassName('user-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        };
+    </script>
+
+    <!-- Pie de página común -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
+

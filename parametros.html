@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parametros</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="public/css/parametrosstyles.css">
+</head>
+
+<body>
+
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="mantenimiento.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <div class="user-menu">
+                <button class="user-button" onclick="toggleUserMenu()">👤</button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="perfilmantenimiento.html">Perfil</a>
+                    <a href="cambiarcontraseñamantenimineto.html">Cambiar contraseña</a>
+                    <a href="index.html">Cerrar Sesión</a>
+                </div>
+            </div>    
+        </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+        <nav>
+            <ul>
+                <li><a href="usuarioyseguridad.html">Usuarios y seguridad</a></li>
+                <li><a href="backup.html">Respaldo y Restauracion</a></li>
+                <li><a href="area.html">Areas y Cargos</a></li>
+                <li><a href="bitacora.html">Historial y Auditoria</a></li>
+                <li><a href="parametros.html">Parametros</a></li>
+                <li><a href="nosotrosmantenimiento.html">Nosotros</a></li>
+                <li><a href="contactomantenimiento.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Todo lo que vayan a agregar -->
+    <main class="main-content" id="mainContent">
+        <section class="security-container">
+            <h2>Parámetros de Seguridad</h2>
+
+            
+                        <!-- Configuración de políticas -->
+                        <div class="parameter-group">
+                            <h3>Políticas de Contraseña</h3>
+                            <label>
+                                <input type="checkbox" id="requireUppercase"> Requiere mayúsculas
+                            </label>
+                            <label>
+                                <input type="checkbox" id="requireNumber"> Requiere números
+                            </label>
+                            <label>
+                                <input type="checkbox" id="requireSpecialChar"> Requiere caracteres especiales
+                            </label>
+                            <button onclick="savePasswordPolicy()">Guardar Políticas</button>
+                        </div>
+            
+                        <!-- Tabla de parámetros -->
+                        <div class="parameter-group">
+                            <h3>Tabla de Parámetros</h3>
+                            <table class="parameters-table">
+                                <thead>
+                                    <tr>
+                                        <th>Parámetro</th>
+                                        <th>Valor</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Mínimo de Contraseña</td>
+                                        <td><input type="number" id="minPasswordLength" value="8"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Máximo de Contraseña</td>
+                                        <td><input type="number" id="maxPasswordLength" value="16"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Intentos Inválidos</td>
+                                        <td><input type="number" id="invalidAttempts" value="3"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Correo de Recuperación</td>
+                                        <td><input type="email" id="recoveryEmail" placeholder="correo@ejemplo.com"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Contraseña de Recuperación</td>
+                                        <td><input type="password" id="recoveryPassword"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <button onclick="saveParameters()">Guardar Parámetros</button>
+                        </div>
+            
+                        <!-- Visualización de cambios -->
+                        <div id="statusMessage" class="status-message"></div>
+                    </section>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContent = document.getElementById('mainContent');
+            sideMenu.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.classList.toggle('show');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-button')) {
+                const dropdowns = document.getElementsByClassName('user-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterUsers() {
+            const input = document.getElementById('searchBar');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('userTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = found ? '' : 'none';
+            }
+        }
+    </script>
+    
+  <!-- JavaScript embebido -->
+  <script>
+    // Función para añadir un rol
+    function addRole() {
+        const roleSelect = document.getElementById('roleSelect');
+        const selectedRole = roleSelect.value;
+        document.getElementById('statusMessage').innerText = `✅ Rol "${selectedRole}" añadido correctamente.`;
+    }
+
+    // Función para eliminar un rol
+    function removeRole() {
+        const roleSelect = document.getElementById('roleSelect');
+        const selectedRole = roleSelect.value;
+        document.getElementById('statusMessage').innerText = `❌ Rol "${selectedRole}" eliminado correctamente.`;
+    }
+
+    // Función para guardar políticas de contraseña
+    function savePasswordPolicy() {
+        const requireUppercase = document.getElementById('requireUppercase').checked;
+        const requireNumber = document.getElementById('requireNumber').checked;
+        const requireSpecialChar = document.getElementById('requireSpecialChar').checked;
+
+        const policies = [
+            requireUppercase ? "Mayúsculas" : "",
+            requireNumber ? "Números" : "",
+            requireSpecialChar ? "Caracteres especiales" : ""
+        ].filter(Boolean).join(", ");
+
+        const message = policies
+            ? `✅ Políticas guardadas: ${policies}.`
+            : "⚠️ No se ha seleccionado ninguna política.";
+        
+        document.getElementById('statusMessage').innerText = message;
+    }
+
+    // Función para guardar parámetros de la tabla
+    function saveParameters() {
+        const minPasswordLength = document.getElementById('minPasswordLength').value;
+        const maxPasswordLength = document.getElementById('maxPasswordLength').value;
+        const invalidAttempts = document.getElementById('invalidAttempts').value;
+        const recoveryEmail = document.getElementById('recoveryEmail').value;
+        const recoveryPassword = document.getElementById('recoveryPassword').value;
+
+        const message = `✅ Parámetros guardados:
+            - Mínimo de Contraseña: ${minPasswordLength}
+            - Máximo de Contraseña: ${maxPasswordLength}
+            - Intentos Inválidos: ${invalidAttempts}
+            - Correo de Recuperación: ${recoveryEmail}
+            - Contraseña de Recuperación: [Se ha guardado].`;
+
+        document.getElementById('statusMessage').innerText = message;
+    }
+</script>
+
+
+    <!-- Pie de página común -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

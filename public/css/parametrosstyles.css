@@ -1,0 +1,92 @@
+
+
+main.main-content {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 120px;
+}
+
+
+.security-container h2 {
+    margin-bottom: 1rem;
+    color: #004080;
+}
+
+.parameter-group {
+    margin-bottom: 2rem;
+}
+
+.parameter-group h3 {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #000000;
+}
+
+input[type="number"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+button {
+    background-color: #004080;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 0.5rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0066cc;
+}
+
+.parameters-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+    color: #000000;
+}
+
+.parameters-table th,
+.parameters-table td {
+    border: 1px solid #000000;
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.parameters-table th {
+    background-color: #f0f0f0;
+    color: #333;
+    font-weight: bold;
+}
+
+.status-message {
+    padding: 1rem;
+    margin-top: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #e6f7ff;
+    color: #004080;
+    font-weight: bold;
+}
+

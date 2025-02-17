@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: linear-gradient(135deg, #147d17, #085696); /* Color de fondo general */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Fondo semitransparente */
+    padding: 20px;
+}
+
+.login-box {
+    background: #3d3d3f; /* Fondo del contenedor más oscuro */
+    backdrop-filter: blur(8px);
+    border-radius: 10px;
+    padding: 25px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra para resaltar */
+    color: #e6e6e6; /* Texto claro */
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #ffffff; /* Blanco para resaltar títulos */
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #555555; /* Borde oscuro */
+    border-radius: 5px;
+    background: #2e2e30; /* Fondo oscuro */
+    color: #e6e6e6;
+}
+
+input::placeholder {
+    color: #b3b3b3; /* Placeholder gris claro */
+}
+
+input:focus {
+    outline: none;
+    border-color: #58a6ff; /* Azul claro para el enfoque */
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #444445;
+    border: none;
+    color: #e6e6e6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+    background-color: #575757;
+    color: #ffffff;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: #d1d1d1;
+    margin-top: 10px;
+}
+
+.options a {
+    color: #58a6ff;
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+.options a:hover {
+    text-decoration: underline;
+}
+
+p {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #d1d1d1;
+}
+
+p a {
+    color: #58a6ff;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alineación a la izquierda */
+    gap: 5px; /* Espacio entre el checkbox y el texto */
+    font-size: 12px;
+    color: #d1d1d1;
+    margin-top: 10px;
+}
+
+.options input[type="checkbox"] {
+    margin: 0px; /* Eliminar márgenes adicionales */
+}
+
+.options label {
+    margin-right: 85px;
+
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="public/css/nosotros.css">
+</head>
+
+<body>
+
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="inicioempleados.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <div class="user-menu">
+                <button class="user-button" onclick="toggleUserMenu()">👤</button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="perfil.html">Perfil</a>
+                    <a href="cambiarcontraseña.html">Cambiar contraseña</a>
+                    <a href="index.html">Cerrar Sesión</a>
+                </div>
+            </div>    
+        </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+        <nav>
+            <ul>
+                <li><a href="Solicitudes.html">Solicitudes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Todo lo que vayan a agregar -->
+    <main class="main-content" id="mainContent">
+            <h1>Nosotros</h1>
+        <p>Conoce a los desarrolladores de la página</p>
+        <div class="creadores-container">
+            <!-- Creador 1 -->
+            <div class="creador-card">
+                <img src="https://via.placeholder.com/100" alt="Creador 1">
+                <h3>Carlos Alberto López Lira</h3>
+                <p>Número de cuenta: 20171001750</p>
+            </div>
+            <!-- Creador 2 -->
+            <div class="creador-card">
+                <img src="https://via.placeholder.com/100" alt="Creador 2">
+                <h3>Cesar Jose Figueroa Lopez</h3>
+                <p>Número de cuenta: 20181004192</p>
+            </div>
+            <!-- Creador 3 -->
+            <div class="creador-card">
+                <img src="https://via.placeholder.com/100" alt="Creador 3">
+                <h3>Melisa Abigail Hernández Ramírez</h3>
+                <p>Número de cuenta: 20171033680</p>
+            </div>
+            <!-- Creador 4 -->
+            <div class="creador-card">
+                <img src="https://via.placeholder.com/100" alt="Creador 4">
+                <h3>Kevin Javier Morales Bustamante</h3>
+                <p>Número de cuenta: 20171002137</p>
+            </div>
+            <!-- Creador 5 -->
+            <div class="creador-card">
+                <img src="https://via.placeholder.com/100" alt="Creador 5">
+                <h3>José Emmanuel Sierra Flores</h3>
+                <p>Número de cuenta: 20211020524</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContent = document.getElementById('mainContent');
+            sideMenu.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.classList.toggle('show');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-button')) {
+                const dropdowns = document.getElementsByClassName('user-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterUsers() {
+            const input = document.getElementById('searchBar');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('userTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = found ? '' : 'none';
+            }
+        }
+    </script>
+
+
+
+
+    <!-- Pie de página común -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

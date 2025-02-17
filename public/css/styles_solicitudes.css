@@ -1,0 +1,231 @@
+/* Estilo general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #147d17, #085696); /*<---------- aqui se cambia el color del fondo*/
+}
+
+/* Barra de navegación superior */
+.navbar {
+    background-color: #ffffff;    
+    color: white;
+    width: 100%;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+    display: flex;
+    width: 100%;   
+    align-items: center;  
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.nav-logo-img {
+    max-height: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    color: rgb(36, 36, 36);
+    font-size: 24px;
+    cursor: pointer;
+    margin-right: 20px;
+}
+
+.search-bar {
+    flex-grow: 1;
+    max-width: 650px; /* Ajusta el tamaño máximo de la barra de búsqueda */
+    padding: 10px 15px;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    font-size: 16px;
+    margin: 0 20px; /* Espacio a los lados */
+    margin-left: 10%;
+}
+
+.user-menu {
+    position: relative;
+    display: flex;
+    align-items: normal;
+    margin-left: auto;
+    z-index: auto;
+}
+
+.user-button {
+    background: none;
+    border: none;
+    color: rgb(36, 36, 36);
+    font-size: 24px;
+    cursor: pointer;
+    margin: 0 20px;
+}
+
+.user-dropdown {
+    display: none;
+    position: fixed;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.user-dropdown a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.user-dropdown a:hover {
+    background-color: #f1f1f1;
+}
+
+.user-dropdown.show {
+    display: block;
+}
+
+/* Menú lateral */
+.side-menu {
+    width: 200px;
+    background-color: #333;
+    padding: 15px;
+    position: fixed;
+    top: 60px; /* Ajusta según la altura de tu navbar */
+    left: -200px; /* Oculto inicialmente */
+    height: 100%;
+    overflow-y: auto;
+    transition: left 0.3s;
+}
+
+.side-menu.open {
+    left: 0; /* Mostrar menú */
+}
+.side-menu nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.side-menu nav ul li {
+    margin: 10px 0;
+}
+
+.side-menu nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.side-menu nav ul li a:hover {
+    background-color: #575757;
+}
+
+
+/* Contenido principal */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-left: 20px; /* Ajusta según el ancho del menú lateral */
+    margin-top: 60px; /* Ajusta según la altura de tu navbar */
+    transition: margin-left 0.3s;
+    
+}
+
+.main-content.shifted {
+    margin-left: 220px; /* Ajusta según el ancho del menú lateral */
+}
+
+/* Footer */
+.footer {
+    background-color: #1c1c1c;   /*<---------- aqui se cambia el color del fondo del footer*/
+    color: white;   /*<---------- aqui se cambia el color de las letras */
+    text-align: center;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Estilo para las tarjetas de las opciones */
+.main-content h1, p{
+    text-align: center;
+    margin-top: 20px;
+    color: #ffffff;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: #f1f1f1;
+    color: #000000;
+    border-radius: 10px;
+    padding: 20px;
+    text-decoration: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    margin-top: 20px;
+    text-align: center;
+    align-items: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card .icon {
+    margin-bottom: 20px;
+}
+
+.card img {
+    width: 70px;
+    height: 70px;
+}
+
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 16px;
+    color: #000000;
+}

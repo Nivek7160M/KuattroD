@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña</title>
+    <link rel="stylesheet" href="public/css/contraseñastyles.css">
+    <link rel="stylesheet" href="public/css/styles.css">
+    
+</head>
+
+<body>
+
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="inicioempleados.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <div class="user-menu">
+                <button class="user-button" onclick="toggleUserMenu()">👤</button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="perfil.html">Perfil</a>
+                    <a href="cambiarcontraseña.html">Cambiar contraseña</a>
+                    <a href="index.html">Cerrar Sesión</a>
+                </div>
+            </div>    
+        </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+        <nav>
+            <ul>
+                <li><a href="Solicitudes.html">Solicitudes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Todo lo que vayan a agregar -->
+    <main class="main-content" id="mainContent">
+        <body>
+
+            <div class="container">
+                <h1>Cambiar Contraseña</h1>
+        
+                <form action="#" method="POST">
+                    <!-- Contraseña antigua -->
+                    <div class="form-group">
+                        <label for="oldPassword">Contraseña Antigua</label>
+                        <input type="password" id="oldPassword" name="oldPassword" required>
+                    </div>
+        
+                    <!-- Nueva contraseña -->
+                    <div class="form-group">
+                        <label for="newPassword">Nueva Contraseña</label>
+                        <input type="password" id="newPassword" name="newPassword" required>
+                    </div>
+        
+                    <!-- Confirmar nueva contraseña -->
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmar Nueva Contraseña</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+        
+                    <!-- Botón de enviar -->
+                    <button type="submit" class="btn-submit">Guardar Cambios</button>
+                </form>
+        
+                <div class="form-message">
+                    <p><a href="inicioempleados.html">Volver a perfil</a></p>
+                </div>
+            </div>
+        
+        </body>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContent = document.getElementById('mainContent');
+            sideMenu.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.classList.toggle('show');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-button')) {
+                const dropdowns = document.getElementsByClassName('user-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterUsers() {
+            const input = document.getElementById('searchBar');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('userTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = found ? '' : 'none';
+            }
+        }
+    </script>
+
+
+
+
+    <!-- Pie de página común -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
