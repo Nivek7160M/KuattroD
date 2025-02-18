@@ -7,22 +7,6 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <style>
-        /* Estilos adicionales para el botón si es necesario */
-        .button {
-          width: 100px;
-          height: 100px;
-          background-color: #4CAF50;
-          border: none;
-          color: white;
-          text-align: center;
-          font-size: 16px;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-      </style>
     <link rel="stylesheet" href="public/css/styles.css">
     <link rel="stylesheet" href="public/css/loginstyles.css">
 </head>
@@ -38,48 +22,53 @@
         </div>
     </header>
 
-
-    <!-- Todo lo que vayan a agregar -->
-     
     <main class="main-content">
-        <body-login>
-            <div class="login-container">
-                <div class="login-box">
-                    <h2>Iniciar Sesión</h2>
-                    <form action="inicio.html" method="GET">
-                        <input type="text" id="usuario" name="usuario"  placeholder="Usuario" pattern="^[A-Z]+$" title="El Usuario solo debe contener letras MAYUSCULAS">
+        <div class="login-container">
+            <div class="login-box">
+                <h2>Iniciar Sesión</h2>
+                <form action="iniciojefe.html" method="GET">
+                    <div class="input-container">
+                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" pattern="^[A-Z]+$" title="El Usuario solo debe contener letras MAYUSCULAS">
+                    </div>
+                    <div class="password-container">
                         <input type="password" id="contraseña" name="password" required placeholder="Contraseña">
-                        <div class="options candado-abierto">
-                            <button><img src="public/imagenes/candado-abierto.png" aling="left" width="30" alt="30"></button>
-                        </div>
-                        <button type="submit">Iniciar Sesión</button>
-                        <p>¿No tienes una cuenta? <a href="CrearUsuario.html">Registrarse</a>
-                             <a href="#">¿Olvidaste tu contraseña?</a>
-                             <p><div id="container"></div>
-                              </p>
-                        </div>
-                        </p>
-                    </form>
-                </div>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <i class="fas fa-lock"></i>
+                        </button>
+                    </div>
+                    <button type="submit">Iniciar Sesión</button>
+                    <p>¿No tienes una cuenta? <a href="autoregistro.html">Registrarse</a></p>
+                    <p><a href="recuperarContraseña.html">¿Olvidaste tu contraseña?</a></p>
+                </form>
             </div>
+        </div>
+    </main>
             
     <script>
         document.getElementById('usuario').addEventListener('input', function() {
             this.value = this.value.toUpperCase();
         });
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('contraseña');
+            const toggleButton = document.querySelector('.toggle-password i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleButton.classList.remove('fa-lock');
+                toggleButton.classList.add('fa-lock-open');
+            } else {
+                passwordInput.type = 'password';
+                toggleButton.classList.remove('fa-lock-open');
+                toggleButton.classList.add('fa-lock');
+            }
+        }
     </script>
 
-        </body-login>
-    </main>
-
-
-
-
-
-    <!-- Pie de página común -->
     <footer class="footer">
-        <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
+        <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
     </footer>
 </body>
 
 </html>
+
