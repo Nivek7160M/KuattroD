@@ -733,3 +733,31 @@ input[type="password"] {
     font-size: 16px;
     color: #000000;
 }
+
+/* Estilos del submenú */
+.submenu {
+    display: none;
+    list-style: none;
+    padding-left: 15px;
+}
+
+.submenu li {
+    margin-top: 5px;
+}
+
+/* Mostrar el submenú cuando tiene la clase 'active' */
+.submenu.active {
+    display: block;
+}
+
+/* Estilos para la flecha */
+.arrow {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+/* Rotar flecha cuando el submenú está abierto */
+.has-submenu.open > a .arrow {
+    transform: rotate(180deg);
+}
