@@ -1,0 +1,179 @@
+/* Estilo general */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #147d17, #085696); /*<---------- aqui se cambia el color del fondo*/
+    font-family: Arial, sans-serif;
+    padding: 0;
+}
+
+/* Barra de navegación superior */
+.navbar {
+    background-color: #e0e0e0;    
+    color: white;
+    width: 100%;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.nav-logo-img {
+    max-height: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* Contenido principal */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    margin-top: 60px; /* Ajusta según la altura de tu navbar */
+    transition: margin-left 0.3s;
+}
+
+/* Footer */
+.footer {
+    background-color: #1c1c1c;   /*<---------- aqui se cambia el color del fondo del footer*/
+    color: white;   /*<---------- aqui se cambia el color de las letras */
+    text-align: center;
+    padding: 10px 20px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+
+/*AUTOREGISTRO*/
+form {
+    max-width: 400px;
+    margin: auto;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+
+form h2{
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+label {
+    display: inline-block;
+    margin-top: 12px;
+    margin-bottom: 3px;
+    font-size: 16px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+button {
+    display: block;
+    width: 50%;
+    margin: 20px auto;
+    background-color: #008f00;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4CAF50;
+}
+
+/* Estilos para los mensajes */
+.requirements {
+    display: none;
+    color: #eabb00;
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.requirements ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.requirements li {
+    margin-bottom: 5px;
+}
+
+.valid {
+    color: #339900;
+}
+
+.invalid {
+    color: #eabb00;
+}
+
+/* Estilo para el mensaje del campo de identidad */
+#identityMessage {
+    display: none;
+    color: #eabb00;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+/* Estilo para el mensaje de coincidencia de contraseñas */
+#passwordMatchMessage {
+    font-size: 0.8em;
+    margin-top: 10px;
+}
+
+.password-match {
+    color: #339900;
+}
+
+.password-mismatch {
+    color: #eabb00;
+}
+
+#yaRegistrado {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #007bff; /* Color verde para el enlace */
+    font-size: 14px;
+    text-decoration: none; /* Elimina el subrayado por defecto */
+}
+
+#yaRegistrado:hover {
+    color: #0056b3; /* Color más oscuro cuando el enlace es hover */
+    text-decoration: underline; /* Subraya el enlace cuando el usuario pasa el cursor sobre él */
+}
