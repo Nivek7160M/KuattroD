@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bitácora</title>
     <link rel="stylesheet" href="public/css/styles.css">
+    
   
 </head>
 <body>
@@ -12,7 +13,7 @@
     <header class="navbar">
         <div class="navbar-container">
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-            <a href="mantenimiento.html" class="nav-logo">
+            <a href="bitacora.html" class="nav-logo">
                 <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
             </a>
             <input type="text" class="search-bar" placeholder="Buscar...">
@@ -71,6 +72,8 @@
                     <td>Cambio de contraseña</td>
                     <td></td>
                     <td><button class="btn-agregar">Agregar</button></td>
+                    <div id="logEventos" class="event-log"></div>
+
                 </tr>
                 <!-- Más registros aquí -->
             </tbody>
@@ -115,6 +118,10 @@
     <footer class="footer">
         <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
     </footer>
+
+
+    <script src="public/js/bitacora.js"></script>
+
 </body>
 </html>
 
