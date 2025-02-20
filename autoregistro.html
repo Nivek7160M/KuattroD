@@ -27,13 +27,16 @@
 
             <label for="numeroID">Número de Identidad:</label>
             <input type="text" id="numeroID" name="numeroID" maxlength="15" required>
-            <div id="identityMessage">Solo se permiten números y guiones (Ej: 0000-0000-00000).</div>
+            <div id="identityMessage">Coloca tu ID</div>
 
             <label for="nombres">Nombres:</label>
-            <input type="text" id="nombres" name="nombres" readonly>
+            <input type="text" id="nombres" name="nombres" disabled readonly>
 
             <label for="apellidos">Apellidos:</label>
-            <input type="text" id="apellidos" name="apellidos" readonly>
+            <input type="text" id="apellidos" name="apellidos" disabled readonly>
+
+            <label for="usuario">Nombre de Usuario:</label>
+            <input type="text" id="usuario" name="usuario" disabled readonly>
 
             <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" required>
@@ -150,21 +153,28 @@
             }
         });
 
-        // Validación de los números de identidad (solo números y guiones)
-        identityInput.addEventListener('focus', function() {
-            identityMessage.style.display = 'block';
+        // Mostrar mensaje de coincidencia de contraseñas solo cuando el campo está enfocado
+        confirmPasswordInput.addEventListener('focus', function() {
+            passwordMatchMessage.style.display = 'block'; // Mostrar el mensaje cuando el campo recibe foco
+            
+            // Actualizar el mensaje de coincidencia de contraseñas al recibir el foco
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                passwordMatchMessage.textContent = 'Las contraseñas no coinciden';
+                passwordMatchMessage.classList.remove('password-match');
+                passwordMatchMessage.classList.add('password-mismatch');
+            } else {
+                passwordMatchMessage.textContent = 'Las contraseñas coinciden';
+                passwordMatchMessage.classList.remove('password-mismatch');
+                passwordMatchMessage.classList.add('password-match');
+            }
         });
-
-        identityInput.addEventListener('blur', function() {
-            identityMessage.style.display = 'none';
+        
+        // Ocultar el mensaje de coincidencia de contraseñas cuando el campo pierde el foco
+        confirmPasswordInput.addEventListener('blur', function() {
+            passwordMatchMessage.style.display = 'none'; // Ocultar el mensaje cuando el campo pierde foco
         });
-
-        // Solo permitir números y guiones en el número de identidad
-        identityInput.addEventListener('input', function() {
-            this.value = this.value.replace(/[^0-9-]/g, ''); // Solo permite números y guiones
-        });
-
-        // Validación de confirmación de la contraseña en tiempo real
+        
+        // Validación en tiempo real de las contraseñas mientras el usuario escribe
         confirmPasswordInput.addEventListener('input', function() {
             if (confirmPasswordInput.value !== passwordInput.value) {
                 passwordMatchMessage.textContent = 'Las contraseñas no coinciden';
@@ -176,6 +186,7 @@
                 passwordMatchMessage.classList.add('password-match');
             }
         });
+
 
         // Prevenir copiar y pegar en los campos de contraseña
         passwordInput.addEventListener('copy', function(event) {
@@ -199,6 +210,50 @@
             window.scrollTo(0, 0); // Esto asegura que la página siempre comience desde la parte superior al recargarse
         };
 
+        //-----------------------------------------------------------------------------------------------------------------------
+        // Validación en tiempo real del campo de identidad (formateo con guiones)
+        identityInput.addEventListener('input', function() {
+            let value = this.value.replace(/[^0-9]/g, ''); // Elimina todo lo que no sean números
+            if (value.length <= 4) {
+                this.value = value;
+            } else if (value.length <= 8) {
+                this.value = value.substring(0, 4) + '-' + value.substring(4);
+            } else if (value.length <= 13) {
+                this.value = value.substring(0, 4) + '-' + value.substring(4, 8) + '-' + value.substring(8);
+            } else {
+                this.value = value.substring(0, 4) + '-' + value.substring(4, 8) + '-' + value.substring(8, 13);
+            }
+        });
+        
+        // Validación del formulario al hacer clic en el botón de registrarse
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            let valid = true;
+            
+            // Validación de la contraseña
+            const password = passwordInput.value;
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecialChar = /[^\w\s]/.test(password);
+            
+            if (password.length < minLength || !hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialChar) {
+                passwordInput.focus(); // Mueve el cursor al campo de contraseña si no cumple los requisitos
+                valid = false;
+            }
+            
+            // Validación de la confirmación de la contraseña
+            if (confirmPasswordInput.value !== password) {
+                confirmPasswordInput.focus(); // Mueve el cursor al campo de confirmación de contraseña si no coinciden
+                valid = false;
+            }
+            
+            // Si algún campo es inválido, se evita el envío del formulario
+            if (!valid) {
+                event.preventDefault(); // Evita el envío del formulario
+            }
+        });
+        
     </script>
 
 </body>
