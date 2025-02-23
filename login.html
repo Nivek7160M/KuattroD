@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="public/css/styles.css">
@@ -13,7 +11,6 @@
 
 <body>
 
-    <!-- Encabezado con logo -->
     <header class="navbar">
         <div class="navbar-container">
             <a href="login.html" class="nav-logo">
@@ -26,12 +23,12 @@
         <div class="login-container">
             <div class="login-box">
                 <h2>Iniciar Sesión</h2>
-                <form action="inicio.html" method="GET">
+                <form id="loginForm">
                     <div class="input-container">
-                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" pattern="^[A-Z]+$" title="El Usuario solo debe contener letras MAYUSCULAS">
+                        <input type="text" id="usuario" name="usuario" placeholder="Usuario" pattern="^[A-Z]+$" title="El Usuario solo debe contener letras MAYÚSCULAS">
                     </div>
                     <div class="password-container">
-                        <input type="password" id="contraseña" name="password" required placeholder="Contraseña">
+                        <input type="password" id="contraseña"   name="contraseña" required placeholder="Contraseña" onpaste="return false" oncopy="return false" oncut="return false">
                         <button type="button" class="toggle-password" onclick="togglePassword()">
                             <i class="fas fa-lock"></i>
                         </button>
@@ -43,10 +40,41 @@
             </div>
         </div>
     </main>
-            
+
     <script>
         document.getElementById('usuario').addEventListener('input', function() {
             this.value = this.value.toUpperCase();
+        });
+
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Evita que la página se recargue
+
+            const nomb_usuario = document.getElementById('usuario').value;
+            const contraseña = document.getElementById('contraseña').value;
+
+            const datos = { nomb_usuario, contraseña };
+
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(datos)
+                });
+
+                const resultado = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(resultado.mensaje || 'Error en la solicitud');
+                }
+
+                console.log('✅ Inicio de sesión exitoso:', resultado);
+                alert(resultado.mensaje);
+                window.location.href = resultado.redirigir;
+
+            } catch (error) {
+                console.error('❌ Error en la petición:', error);
+                alert(error.message);
+            }
         });
 
         function togglePassword() {
@@ -68,7 +96,6 @@
     <footer class="footer">
         <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
     </footer>
+    
 </body>
-
 </html>
-
