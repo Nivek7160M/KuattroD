@@ -130,3 +130,56 @@ app.post('/verificar-codigo', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
 });
+
+
+// AUTOREGISTRO
+// Verificar si existe el numero de identidad
+app.get('/existencia_empl/:dni_empleado', (req, res) => {
+    const dni_empleado = req.params.dni_empleado;
+   
+    connection.execute('SELECT cod_empleado, primer_nombre, segundo_nombre, primer_apellido, segundo_apellido FROM tbl_empleado WHERE dni_empleado = ?', [req.params.dni_empleado], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(results[0] || null);
+            console.log(1);
+        }
+    });
+});
+
+// Verificar si ya existe un usuario con ese numero de identidad
+app.get('/existencia_usua/:cod_empleado', (req, res) => {
+    const cod_empleado = req.params.cod_empleado;
+   
+    connection.execute('SELECT nomb_usuario FROM tbl_usuario WHERE cod_empleado = ?', [req.params.cod_empleado], (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(results[0] || null);
+            console.log(1);
+        }
+    });
+});
+
+// Verificar si ya existe el nombre de usuario
+app.get('/existencia_nomb_usua', (req, res) => {
+    connection.query('SELECT nomb_usuario FROM tbl_usuario', (err, results) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(results);
+        }
+    });
+});
+
+// Crear un usuario
+app.post('/crear_usua', (req, res) => {
+    const { nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo } = req.body;
+    connection.query('INSERT INTO tbl_usuario (nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo) VALUES (?, ?, ?, ?, ?)', [nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo], (err, result) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json({ id: result.insertId });
+        }
+    });
+});
