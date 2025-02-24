@@ -117,10 +117,15 @@ button:hover {
     background-color: #4CAF50;
 }
 
+button:disabled {
+    cursor: not-allowed; /* Cambia el puntero a no permitido cuando el botón está deshabilitado */
+    background-color: #ddd; /* Cambia el color de fondo cuando está deshabilitado */
+}
+
 /* Estilos para los mensajes */
 .requirements {
     display: none;
-    color: #eabb00;
+    color: orange;
     font-size: 0.8em;
     margin-top: 10px;
 }
@@ -139,15 +144,30 @@ button:hover {
 }
 
 .invalid {
-    color: #eabb00;
+    color: orange;
 }
 
 /* Estilo para el mensaje del campo de identidad */
-#identityMessage {
+#identityMessage, #nameMessage, #userMessage {
     display: none;
-    color: #eabb00;
     font-size: 0.8em;
     margin-top: 5px;
+}
+
+/* Estilo para el mensaje flotante */
+.toast-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;  /* Verde */
+    color: green;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 16px;
+    z-index: 9999;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.5s ease-out;  /* Transición suave para desvanecerse */
 }
 
 /* Estilo para el mensaje de coincidencia de contraseñas */
