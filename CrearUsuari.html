@@ -1,85 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro</title>
+    <title>Registro de Empleados</title>
     <link rel="stylesheet" href="public/css/styles.css">
 </head>
-
 <body>
-
     <!-- Encabezado con logo -->
     <header class="navbar">
         <div class="navbar-container">
-            <button class="menu-toggle" onclick="toggleMenu()"></button>
-            <a href="index.html" class="nav-logo">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="inicio.html" class="nav-logo">
                 <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
             </a>
-            <input type="text" class="search-bar" placeholder="Buscar...">
+    
             <div class="user-menu">
+                <button class="user-button" onclick="toggleUserMenu()">👤</button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="perfil.html">Perfil</a>
+                    <a href="cambiarcontraseña.html">Cambiar contraseña</a>
+                    <a href="login.html">Cerrar Sesión</a>
                 </div>
             </div>    
         </div>
     </header>
 
-    <!-- Menú lateral -->
-    
+     <!-- Menú lateral -->
+     <aside class="side-menu" id="sideMenu">
+        <nav>
+            <ul>
+                <li><a href="Solicitudes.html">Solicitudes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-    <!-- Todo lo que vayan a agregar -->
+
+
+    <!-- Formulario de Registro de Empleados -->
     <main class="main-content" id="mainContent">
         <div class="form-container">
-            <h2>Crear Usuario</h2>
-            <form action="inicioempleados.html" method="GET">
+            <h2>Crear Empleados</h2>
+            <form id="empleadoForm">
+                <label for="primer_nombre">Primer Nombre:</label>
+                <input type="text" id="primer_nombre" name="primer_nombre" required>
 
-                <label for="username">Usuario:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="segundo_nombre">Segundo Nombre:</label>
+                <input type="text" id="segundo_nombre" name="segundo_nombre">
 
-                <label for="fullname">Primer Nombre:</label>
-                <input type="text" id="fullname" name="fullname" required>
+                <label for="primer_apellido">Primer Apellido:</label>
+                <input type="text" id="primer_apellido" name="primer_apellido" required>
 
-                <label for="fullname">Segundo Nombre :</label>
-                <input type="text" id="fullname" name="fullname" >
+                <label for="segundo_apellido">Segundo Apellido:</label>
+                <input type="text" id="segundo_apellido" name="segundo_apellido">
 
-                <label for="fullname">Primer Apellido:</label>
-                <input type="text" id="fullname" name="fullname" required>
+                <label for="dni_empleado">DNI:</label>
+                <input type="text" id="dni_empleado" name="dni_empleado" maxlength="15" required placeholder="0000-0000-00000">
 
-                <label for="fullname">Segundo Apellido:</label>
-                <input type="text" id="fullname" name="fullname" >
+                <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
 
-                <label for="password">Contraseña:</label>
-                <input type="password" id="password" name="password" required>
+                <label for="fecha_contratacion">Fecha de Contratación:</label>
+                <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
 
-                <label for="hireDate">Fecha de Contratación:</label>
-                <input type="date" id="hireDate" name="hireDate" required>
-
-                <label for="personalPhone">Teléfono Personal:</label>
-                <input type="text" id="personalPhone" name="personalPhone" required>
-
-                <label for="corporatePhone">Teléfono Corporativo:</label>
-                <input type="text" id="corporatePhone" name="corporatePhone" >
-
-                <label for="personalEmail">Correo Personal:</label>
-                <input type="email" id="personalEmail" name="personalEmail" >
-
-                <label for="corporateEmail">Correo Corporativo:</label>
-                <input type="email" id="corporateEmail" name="corporateEmail" required>
-
-                <label for="departmentHead">Jefe de Departamento:</label>
-                <input type="text" id="departmentHead" name="departmentHead" required>
-
-                <label for="branch">Sucursal:</label>
-                <input type="text" id="branch" name="branch" required>
-
-
-                <button type="submit">Crear Usuario</button>
-            
+                <button type="submit">Crear Empleado</button>
             </form>
         </div>
     </main>
 
     <script>
+        document.getElementById('empleadoForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const empleadoData = {
+                primer_nombre: document.getElementById('primer_nombre').value,
+                segundo_nombre: document.getElementById('segundo_nombre').value,
+                primer_apellido: document.getElementById('primer_apellido').value,
+                segundo_apellido: document.getElementById('segundo_apellido').value,
+                dni_empleado: document.getElementById('dni_empleado').value,
+                fecha_nacimiento: document.getElementById('fecha_nacimiento').value,
+                fecha_contratacion: document.getElementById('fecha_contratacion').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/guardar_empleado', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(empleadoData)
+                });
+
+                const result = await response.json();
+                alert(result.message);
+
+                if (response.ok) {
+                    // Limpiar formulario si fue exitoso
+                    document.getElementById('empleadoForm').reset();
+                }
+            } catch (error) {
+                console.error('❌ Error en la solicitud:', error);
+                alert('Hubo un problema al crear el empleado.');
+            }
+        });
+    </script>
+     <script>
         function toggleMenu() {
             const sideMenu = document.getElementById('sideMenu');
             const mainContent = document.getElementById('mainContent');
@@ -132,5 +157,4 @@
         <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
     </footer>
 </body>
-
 </html>
