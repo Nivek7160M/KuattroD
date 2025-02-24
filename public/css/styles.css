@@ -331,16 +331,16 @@ button[onclick="addUser()"] {
     color: #333;
 }
 
-.form-container input[type="text"],
-.form-container input[type="email"],
-.form-container input[type="password"],
+form-container input[type="text"],
+.form-container input[type="date"],
 .form-container select {
-    width: 100%;
+    width: 50%;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .form-container button {
