@@ -51,16 +51,10 @@
             <div id="passwordRequerimientos" class="requirements">
                 <ul>
                     <li id="lengthRequirement">Debe tener al menos 8 caracteres.</li>
-                    <li id="uppercaseRequirement">
-                        Debe contener al menos una letra mayúscula.
-                    </li>
-                    <li id="lowercaseRequirement">
-                        Debe contener al menos una letra minúscula.
-                    </li>
+                    <li id="uppercaseRequirement">Debe contener al menos una letra mayúscula.</li>
+                    <li id="lowercaseRequirement">Debe contener al menos una letra minúscula.</li>
                     <li id="digitRequirement">Debe contener al menos un número.</li>
-                    <li id="specialCharRequirement">
-                        Debe contener al menos un carácter especial (Ej: @, $, %, etc.).
-                    </li>
+                    <li id="specialCharRequirement">Debe contener al menos un carácter especial (Ej: @, $, %, etc.).</li>
                 </ul>
             </div>
 
@@ -82,6 +76,7 @@
     </footer>
 
     <script>
+        // VALIDACIÓN DE LOS INPUTS
         // Variables
         const passwordInput = document.getElementById("password");
         const confirmPasswordInput = document.getElementById("confirmacionPassword");
@@ -115,7 +110,7 @@
             const hasUpperCase = /[A-Z]/.test(password);
             const hasLowerCase = /[a-z]/.test(password);
             const hasDigit = /\d/.test(password);
-            const hasSpecialChar = /[^\w\s]/.test(password); // Carácter especial: cualquier cosa que no sea letra o número
+            const hasSpecialChar = /[^a-zA-Z0-9\s]/.test(password); // Carácter especial: cualquier cosa que no sea letra o número
 
             // Longitud mínima
             if (password.length >= minLength) {
@@ -197,7 +192,7 @@
             }
         });
 
-        // Prevenir copiar y pegar en los campos de contraseña
+        // Prevenir copiar en los campos de contraseña y confirmacion de contraseña
         passwordInput.addEventListener("copy", function (event) {
             event.preventDefault(); // Evita la acción de copiar
         });
@@ -206,6 +201,7 @@
             event.preventDefault(); // Evita la acción de copiar
         });
 
+        // Prevenir pegar en los campos de contraseña y confirmacion contraseña
         passwordInput.addEventListener("paste", function (event) {
             event.preventDefault(); // Evita la acción de pegar
         });
@@ -214,6 +210,7 @@
             event.preventDefault(); // Evita la acción de pegar
         });
 
+        // Prevenir pegar en el campo de numero de identidad
         identityInput.addEventListener("paste", function (event) {
             event.preventDefault(); // Evita la acción de pegar
         });
@@ -231,54 +228,9 @@
             } else if (value.length <= 8) {
                 this.value = value.substring(0, 4) + "-" + value.substring(4);
             } else if (value.length <= 13) {
-                this.value =
-                    value.substring(0, 4) +
-                    "-" +
-                    value.substring(4, 8) +
-                    "-" +
-                    value.substring(8);
+                this.value = value.substring(0, 4) + "-" + value.substring(4, 8) + "-" + value.substring(8);
             } else {
-                this.value =
-                    value.substring(0, 4) +
-                    "-" +
-                    value.substring(4, 8) +
-                    "-" +
-                    value.substring(8, 13);
-            }
-        });
-
-        // Validación del formulario al hacer clic en el botón de registrarse
-        document.getElementById("registrationForm").addEventListener("submit", function (event) {
-            let valid = true;
-
-            // Validación de la contraseña
-            const password = passwordInput.value;
-            const minLength = 8;
-            const hasUpperCase = /[A-Z]/.test(password);
-            const hasLowerCase = /[a-z]/.test(password);
-            const hasDigit = /\d/.test(password);
-            const hasSpecialChar = /[^\w\s]/.test(password);
-
-            if (
-                password.length < minLength ||
-                !hasUpperCase ||
-                !hasLowerCase ||
-                !hasDigit ||
-                !hasSpecialChar
-            ) {
-                passwordInput.focus(); // Mueve el cursor al campo de contraseña si no cumple los requisitos
-                valid = false;
-            }
-
-            // Validación de la confirmación de la contraseña
-            if (confirmPasswordInput.value !== password) {
-                confirmPasswordInput.focus(); // Mueve el cursor al campo de confirmación de contraseña si no coinciden
-                valid = false;
-            }
-
-            // Si algún campo es inválido, se evita el envío del formulario
-            if (!valid) {
-                event.preventDefault(); // Evita el envío del formulario
+                this.value = value.substring(0, 4) + "-" + value.substring(4, 8) + "-" + value.substring(8, 13);
             }
         });
 
@@ -327,7 +279,7 @@
                 .then((response) => response.json())
                 .then((data) => {
                     if (data) {
-                        identityMessage.textContent = "Este número de identidad ya cuenta con un usuario";
+                        identityMessage.textContent = "El número de identidad ya cuenta con un usuario";
                         identityMessage.style.color = "red";
                         identityMessage.style.display = "block";
                     } else {
@@ -392,16 +344,41 @@
         }
 
 
-
-
-
         // Enviar la información al servidor
-        document.getElementById("registrationForm").addEventListener("submit", function (event) {
-            event.preventDefault();
+        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+            let valid = true;
+
+            // Validación de la contraseña
+            const password = passwordInput.value;
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecialChar = /[^a-zA-Z0-9\s]/.test(password);
+
+            if (password.length < minLength || !hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialChar) {
+                passwordInput.focus(); // Mueve el cursor al campo de contraseña si no cumple los requisitos
+                valid = false;
+            }
+
+            // Validación de la confirmación de la contraseña
+            if (confirmPasswordInput.value !== password) {
+                confirmPasswordInput.focus(); // Mueve el cursor al campo de confirmación de contraseña si no coinciden
+                valid = false;
+            }
+
+            // Si algún campo es inválido, se evita el envío del formulario
+            if (!valid) {
+                event.preventDefault(); // Evita el envío del formulario
+                return; // Detenemos la ejecución aquí
+            }
+
+            // Si todo es válido, procedemos a enviar la información
+            event.preventDefault(); // Prevenimos el envío estándar del formulario
             const formData = new FormData(this);
             const data = {
                 nomb_usuario: document.getElementById("usuario").value,
-                contraseña: document.getElementById("password").value, // Encriptar contraseña
+                contraseña: document.getElementById("password").value,
                 cod_empleado: codEmpleado,  // Usamos el cod_empleado que obtuvimos antes
                 id_estado_usuario: 1, // Siempre 1
                 correo: document.getElementById("email").value
@@ -420,14 +397,14 @@
 
                     // Crear el mensaje de éxito flotante
                     const successMessage = document.createElement("div");
-                    successMessage.textContent = "¡Usuario creado exitosamente!";
+                    successMessage.textContent = "¡Usuario registrado exitosamente!";
 
-                    // Agregar la clase "toast-message" del archivo CSS
+                    // Agregar la clase "toast-message"
                     successMessage.classList.add("toast-message");
 
                     document.body.appendChild(successMessage);
 
-                    // Desaparecer el mensaje después de 3 segundos
+                    // Desaparecer el mensaje
                     setTimeout(function () {
                         successMessage.style.opacity = "0";  // Desvanecer el mensaje
                         setTimeout(function () {
