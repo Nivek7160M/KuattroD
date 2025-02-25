@@ -207,7 +207,10 @@ app.post('/guardar_empleado', (req, res) => {
     });
 });
 
+
 // AUTOREGISTRO
+const bcryptjs = require('bcryptjs'); //Importando el módulo bcryptjs
+
 // Verificar si existe el numero de identidad
 app.get('/existencia_empl/:dni_empleado', (req, res) => {
     const dni_empleado = req.params.dni_empleado;
@@ -222,7 +225,7 @@ app.get('/existencia_empl/:dni_empleado', (req, res) => {
     });
 });
 
-// Verificar si ya existe un usuario con ese numero de identidad
+// Verificar si ya existe un usuario relacionado con ese numero de identidad
 app.get('/existencia_usua/:cod_empleado', (req, res) => {
     const cod_empleado = req.params.cod_empleado;
    
@@ -248,9 +251,11 @@ app.get('/existencia_nomb_usua', (req, res) => {
 });
 
 // Crear un usuario
-app.post('/crear_usua', (req, res) => {
+app.post('/crear_usua', async (req, res) => {
     const { nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo } = req.body;
-    db.query('INSERT INTO tbl_usuario (nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo) VALUES (?, ?, ?, ?, ?)', [nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo], (err, result) => {
+    let passwordHash = await bcryptjs.hash(contraseña, 10);
+
+    db.query('INSERT INTO tbl_usuario (nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo) VALUES (?, ?, ?, ?, ?)', [nomb_usuario, passwordHash, cod_empleado, id_estado_usuario, correo], (err, result) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -258,7 +263,6 @@ app.post('/crear_usua', (req, res) => {
         }
     });
 });
-
 
 
 // Iniciar el servidor
