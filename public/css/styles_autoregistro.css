@@ -147,7 +147,7 @@ button:disabled {
     color: orange;
 }
 
-/* Estilo para el mensaje del campo de identidad */
+/* Estilo para los mensajes de div*/
 #identityMessage, #nameMessage, #userMessage {
     display: none;
     font-size: 0.8em;
@@ -160,8 +160,8 @@ button:disabled {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: white;  /* Verde */
-    color: green;
+    background-color: #167bff;  /* Verde */
+    color: white;
     padding: 15px 30px;
     border-radius: 5px;
     font-size: 16px;
@@ -181,14 +181,14 @@ button:disabled {
 }
 
 .password-mismatch {
-    color: #eabb00;
+    color: orange;
 }
 
 #yaRegistrado {
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: #007bff; /* Color verde para el enlace */
+    color: #007bff; /* Color azul para el enlace */
     font-size: 14px;
     text-decoration: none; /* Elimina el subrayado por defecto */
 }
