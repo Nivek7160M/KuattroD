@@ -284,11 +284,11 @@ app.get('/existencia_nomb_usua', (req, res) => {
 });
 
 // Crear un usuario
-app.post('/crear_usua', async (req, res) => {
-    const { nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo } = req.body;
-    let passwordHash = await bcryptjs.hash(contraseña, 10);
+app.post('/crear_usua', (req, res) => {
+    const { nomb_usuario, contraseña, cod_empleado, id_estado_usuario, tipo_registro, correo } = req.body;
+    let passwordHash = bcryptjs.hashSync(contraseña, 10);
 
-    db.query('INSERT INTO tbl_usuario (nomb_usuario, contraseña, cod_empleado, id_estado_usuario, correo) VALUES (?, ?, ?, ?, ?)', [nomb_usuario, passwordHash, cod_empleado, id_estado_usuario, correo], (err, result) => {
+    db.query('INSERT INTO tbl_usuario (nomb_usuario, contraseña, cod_empleado, id_estado_usuario, tipo_registro, correo) VALUES (?, ?, ?, ?, ?, ?)', [nomb_usuario, passwordHash, cod_empleado, id_estado_usuario, tipo_registro, correo], (err, result) => {
         if (err) {
             res.status(500).send(err);
         } else {
