@@ -220,16 +220,16 @@ app.post('/verify-otp', (req, res) => {
 
 // Ruta para guardar empleados en tbl_empleado
 app.post('/guardar_empleado', (req, res) => {
-    const { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion } = req.body;
+    const { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion, cod_empleado  } = req.body;
 
-    if (!primer_nombre || !primer_apellido || !dni_empleado || !fecha_nacimiento || !fecha_contratacion) {
+    if (!primer_nombre || !primer_apellido || !dni_empleado || !fecha_nacimiento || !fecha_contratacion || !cod_empleado) {
         return res.status(400).json({ message: 'Todos los campos obligatorios deben estar llenos.' });
     }
 
-    const sql = `INSERT INTO tbl_empleado (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion)
-                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO tbl_empleado (primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion, cod_empleado)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
 
-    db.query(sql, [primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion], (err, result) => {
+    db.query(sql, [primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion, cod_empleado], (err, result) => {
         if (err) {
             console.error('❌ Error al guardar empleado:', err);
             return res.status(500).json({ message: 'Error al guardar el empleado' });
