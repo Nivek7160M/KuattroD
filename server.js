@@ -187,6 +187,37 @@ Si no solicitaste este código, ignora este correo.
     });
 });
 
+
+// Ruta para verificar el OTP
+app.post('/verify-otp', (req, res) => {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+        return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
+    }
+
+    db.query('SELECT * FROM tbl_otp WHERE otp = ?', [otp], (err, results) => {
+        if (err) {
+            console.error('❌ Error en la consulta SQL:', err);
+            return res.status(500).json({ mensaje: 'Error en el servidor' });
+        }
+
+        if (results.length === 0) {
+            console.log('❌ OTP incorrecto:', otp);
+            return res.status(400).json({ mensaje: 'Código incorrecto' });
+        }
+
+        // Si el OTP es correcto, puedes eliminarlo de la base de datos (opcional)
+        db.query('DELETE FROM tbl_otp WHERE otp = ?', [otp], (err) => {
+            if (err) {
+                console.error('❌ Error eliminando OTP:', err);
+            }
+        });
+
+        return res.json({ mensaje: 'Código correcto', redirigir: '/cambiarcontraseñarecu.html' });
+    });
+});
+
 // Ruta para guardar empleados en tbl_empleado
 app.post('/guardar_empleado', (req, res) => {
     const { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido, dni_empleado, fecha_nacimiento, fecha_contratacion } = req.body;
