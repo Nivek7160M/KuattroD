@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,9 +7,8 @@
     <link rel="stylesheet" href="public/css/styles.css">
     <link rel="stylesheet" href="public/css/recuperacion.css">
 </head>
-
 <body>
-    <!-- Encabezado con logo -->
+
     <header class="navbar">
         <div class="navbar-container">
             <a href="login.html" class="nav-logo">
@@ -19,21 +17,17 @@
         </div>
     </header>
 
-    <!-- Contenido principal -->
     <main class="main-content">
         <div class="container">
             <h2>Recuperación de Contraseña</h2>
             <p>Ingresa tu correo para recibir un código de verificación</p>
             <label for="email">Correo Electrónico:</label>
             <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
-            <button id="openModalBtn">Enviar Código</button>
+            <button id="sendOtpBtn">Enviar Código</button>
             <a href="login.html">Regresar al inicio</a>
         </div>
-
-     
     </main>
 
-    <!-- Modal para ingresar el código OTP -->
     <div id="otpModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
@@ -42,59 +36,92 @@
             <input type="text" id="otpInput" placeholder="Código OTP" maxlength="6">
             <button id="verifyOtpBtn">Verificar Código</button>
         </div>
-
     </div>
 
-    <!-- Pie de página -->
     <footer class="footer">
         <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
     </footer>
 
     <script>
-        // Obtener elementos del DOM
-        let openModalBtn = document.getElementById("openModalBtn");
-        let modal = document.getElementById("otpModal");
-        let closeModal = document.querySelector(".close");
-        let verifyOtpBtn = document.getElementById("verifyOtpBtn");
+        document.addEventListener("DOMContentLoaded", function () {
+            const sendOtpBtn = document.getElementById("sendOtpBtn");
+            const otpModal = document.getElementById("otpModal");
+            const closeModal = document.querySelector(".close");
+            const verifyOtpBtn = document.getElementById("verifyOtpBtn");
 
-        // Validar el correo antes de abrir el modal
-        openModalBtn.addEventListener("click", function(event) {
-            event.preventDefault(); // Evita que el formulario se envíe
+            // Enviar OTP
+            sendOtpBtn.addEventListener("click", async function (event) {
+                event.preventDefault();
+                const emailInput = document.getElementById("email").value;
+                const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-            let emailInput = document.getElementById("email").value;
-            let emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Expresión regular para validar email
+                if (!emailPattern.test(emailInput)) {
+                    alert("Por favor, ingresa un correo válido.");
+                    return;
+                }
 
-            if (!emailPattern.test(emailInput)) {
-                alert("Por favor, ingresa un correo válido.");
-                return;
-            }
+                try {
+                    // Cambiado a la ruta correcta en el backend
+                    const response = await fetch("http://localhost:3000/recuperar-password", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: emailInput }),
+                    });
 
-            modal.style.display = "block"; // Solo abre el modal si el correo es válido
-        });
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert("Código enviado. Revisa tu correo.");
+                        otpModal.style.display = "block";
+                    } else {
+                        alert("Error al enviar el código: " + data.mensaje);
+                    }
+                } catch (error) {
+                    alert("Error de conexión con el servidor.");
+                }
+            });
 
-        // Cerrar modal al hacer clic en la "X"
-        closeModal.addEventListener("click", function() {
-            modal.style.display = "none";
-        });
+            // Verificar OTP
+            verifyOtpBtn.addEventListener("click", async function () {
+                const emailInput = document.getElementById("email").value;
+                const otpInput = document.getElementById("otpInput").value;
 
-        // Cerrar modal al hacer clic fuera del contenido
-        window.addEventListener("click", function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
+                if (otpInput.trim() === '') {
+                    alert("Por favor, ingresa el código OTP.");
+                    return;
+                }
 
-        // Simulación de validación del código OTP
-        verifyOtpBtn.addEventListener("click", function() {
-            let otpInput = document.getElementById("otpInput").value;
-            if (otpInput === "123456") { // Aquí iría la validación real con el backend
-                alert("Código correcto. Redirigiendo...");
-                window.location.href = "cambiarcontraseñarecu.html"; // Redirigir a la página de cambio de contraseña
-            } else {
-                alert("Código incorrecto. Intenta de nuevo.");
-            }
+                try {
+                    // Cambiado a la ruta correcta en el backend
+                    const response = await fetch("http://localhost:3000/verify-otp", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email: emailInput, otp: otpInput }),
+                    });
+
+                    const data = await response.json();
+                    if (response.ok) {
+                        alert("Código correcto. Redirigiendo...");
+                        window.location.href = "cambiarcontraseñarecu.html";
+                    } else {
+                        alert("Código incorrecto. Intenta de nuevo.");
+                    }
+                } catch (error) {
+                    alert("Error de conexión con el servidor.");
+                }
+            });
+
+            // Cerrar Modal
+            closeModal.addEventListener("click", function () {
+                otpModal.style.display = "none";
+            });
+
+            window.addEventListener("click", function (event) {
+                if (event.target === otpModal) {
+                    otpModal.style.display = "none";
+                }
+            });
         });
     </script>
-</body>
 
+</body>
 </html>
