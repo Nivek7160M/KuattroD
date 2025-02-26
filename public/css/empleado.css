@@ -1,0 +1,81 @@
+/* Contenedor de la tabla */
+.table-container {
+    width: 90%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Botón de Crear */
+.btn-create {
+    display: block;
+    width: 200px;
+    margin: 10px auto;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+}
+
+.btn-create:hover {
+    background: #218838;
+}
+
+/* Tabla de empleados */
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* Estilos para las celdas */
+.employee-table th,
+.employee-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.employee-table th {
+    background: #007bff;
+    color: white;
+}
+
+/* Filas alternas */
+.employee-table tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+/* Botones de acción */
+.btn-edit {
+    background: #ffc107;
+    color: black;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-edit:hover {
+    background: #e0a800;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
