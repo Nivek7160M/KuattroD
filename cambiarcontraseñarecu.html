@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cambiar Contraseña</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/contraseñastyles.css">
+</head>
+
+<body>
+
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <a href="login.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content" id="mainContent">
+        <div class="container">
+            <h1>Cambiar Contraseña</h1>
+
+            <form id="changePasswordForm">
+                <!-- Nueva contraseña -->
+                <div class="form-group">
+                    <label for="newPassword">Nueva Contraseña</label>
+                    <input type="password" id="newPassword" name="newPassword" required>
+                </div>
+
+                <!-- Confirmar nueva contraseña -->
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Nueva Contraseña</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+
+                <!-- Botón de enviar -->
+                <button type="submit" class="btn-submit">Guardar Cambios</button>
+            </form>
+
+            <div class="form-message">
+                <p><a href="login.html">Salir</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Script para enviar datos al backend -->
+    <script>
+        document.getElementById('changePasswordForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (newPassword !== confirmPassword) {
+                alert('Las contraseñas no coinciden.');
+                return;
+            }
+
+            fetch('http://localhost:3000/cambiar-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    newPassword: newPassword,
+                    confirmPassword: confirmPassword
+                }),
+                credentials: 'include' // Incluye las cookies para mantener la sesión
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.mensaje) {
+                    alert(data.mensaje);
+                }
+                if (data.redirigir) {
+                    window.location.href = data.redirigir;
+                }
+            })
+            .catch(error => console.error('❌ Error:', error));
+        });
+    </script>
+
+    <!-- Pie de página -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
