@@ -381,6 +381,7 @@
                 contraseña: document.getElementById("password").value,
                 cod_empleado: codEmpleado,  // Usamos el cod_empleado que obtuvimos antes
                 id_estado_usuario: 1, // Siempre 1
+                tipo_registro: 1, //Siempre 1
                 correo: document.getElementById("email").value
             };
 
@@ -413,7 +414,7 @@
 
                         // Redirigir a otra página después de que el mensaje desaparezca
                         window.location.href = "login.html"; // Redirigir a la página de login
-                    }, 3000);  // El mensaje desaparecerá después de 3 segundos
+                    }, 2500);  // El mensaje desaparecerá después de 2.5 segundos
                 })
                 .catch((error) => console.error('Error:', error));
         });
