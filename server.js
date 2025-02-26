@@ -298,6 +298,32 @@ app.post('/crear_usua', (req, res) => {
 });
 
 
+// Obtener todos los usuarios con información de empleado para la tabla dinámica
+app.get('/usuarios', (req, res) => {
+    const query = `
+       SELECT 
+            u.nomb_usuario, 
+            eu.nombre_estado_usuario, 
+            u.correo, 
+            e.primer_nombre, 
+            e.primer_apellido,
+            e.dni_empleado
+        FROM tbl_usuario u
+        INNER JOIN tbl_empleado e ON u.cod_empleado = e.cod_empleado
+        INNER JOIN tbl_estado_usuario eu on u.id_estado_usuario= eu.id_estado_usuario
+    `;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err);
+        } else {
+            res.json(results); // Devuelve los datos de usuario con información del empleado
+        }
+    });
+});
+
+
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
