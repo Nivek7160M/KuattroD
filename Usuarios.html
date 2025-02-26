@@ -2,22 +2,21 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
-    <link rel="stylesheet" href="public/css/styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrarse</title>
+    <link rel="stylesheet" href="public/css/styles_usuarios.css" />
 </head>
 
 <body>
-
-    <!-- Encabezado con logo -->
-    <header class="navbar">
+      <!-- Encabezado con logo -->
+      <header class="navbar">
         <div class="navbar-container">
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <a href="inicio.html" class="nav-logo">
                 <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
             </a>
-            <input type="text" class="search-bar" placeholder="Buscar...">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Buscar...">
             <div class="user-menu">
                 <button class="user-button" onclick="toggleUserMenu()">👤</button>
                 <div class="user-dropdown" id="userDropdown">
@@ -42,178 +41,550 @@
     </aside>
 
     <!-- Todo lo que vayan a agregar -->
-    <main class="main-content" id="mainContent">
-        <br>
-        <h1>Información de Usuarios</h1>
-        <section class="table-container">
-        <table>
+    <main class="main-content">
+        <h2>Lista de Usuarios</h2>
+        <table id="usersTable">
             <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Nombre</th>
-                    <th>Teléfono Personal</th>
-                    <th>Teléfono Empresa</th>
-                    <th>Correo Personal</th>
-                    <th>Correo Empresa</th>
-                    <th>Sucursal</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
+            <tr>
+            <th>Número de Identidad</th>
+            <th>Nombres</th>
+            <th>Apellidos</th>
+            <th>Nombre de Usuario</th>
+            <th>Correo Electrónico</th>
+            </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>usuario1</td>
-                    <td>Nombre 1</td>
-                    <td><input type="text" value="123456789"></td>
-                    <td><input type="text" value="987654321"></td>
-                    <td><input type="email" value="personal1@example.com"></td>
-                    <td><input type="email" value="empresa1@example.com"></td>
-                    <td><input type="text" value="Francisco Morazan"></td>
-                    <td><input type="text" value="Activo"></td>
-                    <td>
-                        <button onclick="window.location.href='usuario.html'">Ver Usuario</button>
-                        <button onclick="deleteUser()">Eliminar</button>
-                    </td>
-                </tr>
-                <!-- Más filas de ejemplo -->
-                <tr>
-                    <td>usuario2</td>
-                    <td>Nombre 2</td>
-                    <td><input type="text" value="223456789"></td>
-                    <td><input type="text" value="287654321"></td>
-                    <td><input type="email" value="personal2@example.com"></td>
-                    <td><input type="email" value="empresa2@example.com"></td>
-                    <td><input type="text" value="Francisco Morazan"></td>
-                    <td><input type="text" value="Activo"></td>
-                    <td>
-                        <button onclick="window.location.href='usuario.html'">Ver Usuario</button>
-                        <button onclick="deleteUser()">Eliminar</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>usuario3</td>
-                    <td>Nombre 3</td>
-                    <td><input type="text" value="323456789"></td>
-                    <td><input type="text" value="387654321"></td>
-                    <td><input type="email" value="personal3@example.com"></td>
-                    <td><input type="email" value="empresa3@example.com"></td>
-                    <td><input type="text" value="Francisco Morazan"></td>
-                    <td><input type="text" value="Inactivo"></td>
-                    <td>
-                        <button onclick="window.location.href='usuario.html'">Ver Usuario</button>
-                        <button onclick="deleteUser()">Eliminar</button>
-                </tr>
-                <tr>
-                    <td>usuario4</td>
-                    <td>Nombre 4</td>
-                    <td><input type="text" value="423456789"></td>
-                    <td><input type="text" value="487654321"></td>
-                    <td><input type="email" value="personal4@example.com"></td>
-                    <td><input type="email" value="empresa4@example.com"></td>
-                    <td><input type="text" value="Francisco Morazan"></td>
-                    <td><input type="text" value="Activo"></td>
-                    <td>
-                        <button onclick="window.location.href='usuario.html'">Ver Usuario</button>
-                        <button onclick="deleteUser()">Eliminar</button>
-                </tr>
-                <tr>
-                    <td>usuario5</td>
-                    <td>Nombre 5</td>
-                    <td><input type="text" value="523456789"></td>
-                    <td><input type="text" value="587654321"></td>
-                    <td><input type="email" value="personal5@example.com"></td>
-                    <td><input type="email" value="empresa5@example.com"></td>
-                    <td><input type="text" value="San Pedro Sula"></td>
-                    <td><input type="text" value="Inactivo"></td>
-                    <td>
-                        <button onclick="window.location.href='usuario.html'">Ver Usuario</button>
-                        <button onclick="deleteUser()">Eliminar</button>
-                </tr>
-                <tr>
-                    <td>usuario6</td>
-                    <td>Nombre 6</td>
-                    <td><input type="text" value="623456789"></td>
-                    <td><input type="text" value="687654321"></td>
-                    <td><input type="email" value="personal6@example.com"></td>
-                    <td><input type="email" value="empresa6@example.com"></td>
-                    <td><input type="text" value="San Pedro Sula"></td>
-                    <td><input type="text" value="Activo"></td>
-                    <td>
-                        <button onclick="window.location.href='usuario.html'">Ver Usuario</button>
-                        <button onclick="deleteUser()">Eliminar</button>
-                </tr>
+            <!-- Las filas de usuarios se agregarán aquí dinámicamente -->
             </tbody>
         </table>
-    </section>
-         
+        <script>
+            // Función para cargar los usuarios desde el servidor
+            function loadUsers() {
+                fetch('http://localhost:3000/usuarios')
+                    .then(response => response.json())
+                    .then(data => {
+                        const usersTableBody = document.getElementById('usersTable').getElementsByTagName('tbody')[0];
+                        usersTableBody.innerHTML = ''; // Limpiar la tabla antes de agregar los datos
+        
+                        data.forEach(user => {
+                            const row = usersTableBody.insertRow();
+                            row.insertCell(0).textContent = user.dni_empleado;
+                            row.insertCell(1).textContent = user.primer_nombre;
+                            row.insertCell(2).textContent = user.primer_apellido;
+                            row.insertCell(3).textContent = user.nomb_usuario;
+                            row.insertCell(4).textContent = user.correo;
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar los usuarios:', error));
+            }
+        
+            // Llama a la función loadUsers cuando el DOM esté completamente cargado
+            document.addEventListener("DOMContentLoaded", loadUsers);
+        </script>
+
+<script>
+    function toggleMenu() {
+        const sideMenu = document.getElementById('sideMenu');
+        const mainContent = document.getElementById('mainContent');
+        sideMenu.classList.toggle('open');
+        mainContent.classList.toggle('shifted');
+    }
+    function toggleUserMenu() {
+        const userDropdown = document.getElementById('userDropdown');
+        userDropdown.classList.toggle('show');
+    }
+
+    window.onclick = function(event) {
+        if (!event.target.matches('.user-button')) {
+            const dropdowns = document.getElementsByClassName('user-dropdown');
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+    function filterUsers() {
+        const input = document.getElementById('searchBar');
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById('userTable');
+        const tr = table.getElementsByTagName('tr');
+
+        for (let i = 0; i < tr.length; i++) {
+            const td = tr[i].getElementsByTagName('td');
+            let found = false;
+            for (let j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            tr[i].style.display = found ? '' : 'none';
+        }
+    }
+</script>
+
+
+        <!-- Botón para abrir el modal -->
+        <button id="openModalButton">Agregar nuevo usuario</button>
+
+        <!-- El Modal -->
+        <div id="myModal" class="modal">
+            <!-- Contenido del Modal -->
+            <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="registrationForm">
+                <h2>Registrarse</h2>
+                <hr />
+
+                <label for="numeroID">Número de Identidad:</label>
+                <input type="text" id="numeroID" name="numeroID" maxlength="15" required />
+                <div id="identityMessage"></div>
+<br>
+                <label for="nombres">Nombres:</label>
+                <input type="text" id="nombres" name="nombres" readonly />
+
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" readonly />
+                <div id="nameMessage"></div>
+
+                <label for="usuario">Nombre de Usuario:</label>
+                <input type="text" id="usuario" name="usuario" readonly />
+                <div id="userMessage"></div>
+
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required />
+
+                <div>
+                <label for="password">Contraseña:</label>
+                <input type="password" id="password" name="password" required />
+                </div>
+
+                <div id="passwordRequerimientos" class="requirements">
+                <ul>
+                    <li id="lengthRequirement">Debe tener al menos 8 caracteres.</li>
+                    <li id="uppercaseRequirement">
+                    Debe contener al menos una letra mayúscula.
+                    </li>
+                    <li id="lowercaseRequirement">
+                    Debe contener al menos una letra minúscula.
+                    </li>
+                    <li id="digitRequirement">Debe contener al menos un número.</li>
+                    <li id="specialCharRequirement">
+                    Debe contener al menos un carácter especial (Ej: @, $, %, etc.).
+                    </li>
+                </ul>
+                </div>
+
+                <label for="confirmacionPassword">Confirma tu contraseña:</label>
+                <input type="password" id="confirmacionPassword" name="confirmacionPassword" required />
+                <div id="passwordMatchMessage"></div>
+
+                <button class="regis" type="submit" id="registerButton">Registrarme</button>
+
+            </form>
+            </div>
+        </div>
+
+        <script>
+            // Obtener el modal
+            var modal = document.getElementById("myModal");
+
+            // Obtener el botón que abre el modal
+            var btn = document.getElementById("openModalButton");
+
+            // Obtener el elemento <span> que cierra el modal
+            var span = document.getElementsByClassName("close")[0];
+
+            // Cuando el usuario hace clic en el botón, abre el modal
+            btn.onclick = function () {
+            modal.style.display = "block";
+            }
+
+            // Cuando el usuario hace clic en <span> (x), cierra el modal
+            span.onclick = function () {
+            modal.style.display = "none";
+            }
+
+            // Cuando el usuario hace clic en cualquier lugar fuera del modal, lo cierra
+            window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            }
+        </script>
     </main>
-
-    <script>
-        function toggleMenu() {
-            const sideMenu = document.getElementById('sideMenu');
-            const mainContent = document.getElementById('mainContent');
-            sideMenu.classList.toggle('open');
-            mainContent.classList.toggle('shifted');
-        }
-        function toggleUserMenu() {
-            const userDropdown = document.getElementById('userDropdown');
-            userDropdown.classList.toggle('show');
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.matches('.user-button')) {
-                const dropdowns = document.getElementsByClassName('user-dropdown');
-                for (let i = 0; i < dropdowns.length; i++) {
-                    const openDropdown = dropdowns[i];
-                    if (openDropdown.classList.contains('show')) {
-                        openDropdown.classList.remove('show');
-                    }
-                }
-            }
-        }
-
-        function changePassword(username) {
-            alert('Cambiar contraseña para ' + username);
-            // Aquí puedes agregar la lógica para cambiar la contraseña
-        }
-        function filterUsers() {
-            const input = document.getElementById('searchBar');
-            const filter = input.value.toLowerCase();
-            const table = document.getElementById('userTable');
-            const tr = table.getElementsByTagName('tr');
-
-            for (let i = 0; i < tr.length; i++) {
-                const td = tr[i].getElementsByTagName('td');
-                let found = false;
-                for (let j = 0; j < td.length; j++) {
-                    if (td[j]) {
-                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
-                            found = true;
-                            break;
-                        }
-                    }
-                }
-                tr[i].style.display = found ? '' : 'none';
-            }
-        }
-        function editUser() {
-            // Lógica para editar usuario
-        }
-
-        function deleteUser() {
-            // Lógica para eliminar usuario
-        }
-
-        function addUser() {
-            // Lógica para añadir usuario
-        }
-
-    </script>
 
     <!-- Pie de página común -->
     <footer class="footer">
-        <p>&copy; Kuattro Distribuciones.     Todos los derechos reservados.</p>
+        <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
     </footer>
+
+    <script>
+        // Variables
+        const passwordInput = document.getElementById("password");
+        const confirmPasswordInput = document.getElementById("confirmacionPassword");
+        const identityInput = document.getElementById("numeroID");
+        const passwordRequirements = document.getElementById("passwordRequerimientos");
+        const passwordMatchMessage = document.getElementById("passwordMatchMessage");
+        const lengthRequirement = document.getElementById("lengthRequirement");
+        const uppercaseRequirement = document.getElementById("uppercaseRequirement");
+        const lowercaseRequirement = document.getElementById("lowercaseRequirement");
+        const digitRequirement = document.getElementById("digitRequirement");
+        const specialCharRequirement = document.getElementById("specialCharRequirement");
+        const identityMessage = document.getElementById("identityMessage");
+        const nameMessage = document.getElementById("nameMessage");
+        const userMessage = document.getElementById("userMessage");
+
+        // Muestra los requisitos de contraseña cuando el input recibe foco
+        passwordInput.addEventListener("focus", function () {
+            passwordRequirements.style.display = "block";
+        });
+
+        // Oculta los requisitos de contraseña cuando el input pierde el foco
+        passwordInput.addEventListener("blur", function () {
+            passwordRequirements.style.display = "none";
+        });
+
+        // Validación en tiempo real de la contraseña
+        passwordInput.addEventListener("input", function () {
+            const password = passwordInput.value;
+
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecialChar = /[^\w\s]/.test(password); // Carácter especial: cualquier cosa que no sea letra o número
+
+            // Longitud mínima
+            if (password.length >= minLength) {
+                lengthRequirement.classList.add("valid");
+                lengthRequirement.classList.remove("invalid");
+            } else {
+                lengthRequirement.classList.add("invalid");
+                lengthRequirement.classList.remove("valid");
+            }
+
+            // Mayúscula
+            if (hasUpperCase) {
+                uppercaseRequirement.classList.add("valid");
+                uppercaseRequirement.classList.remove("invalid");
+            } else {
+                uppercaseRequirement.classList.add("invalid");
+                uppercaseRequirement.classList.remove("valid");
+            }
+
+            // Minúscula
+            if (hasLowerCase) {
+                lowercaseRequirement.classList.add("valid");
+                lowercaseRequirement.classList.remove("invalid");
+            } else {
+                lowercaseRequirement.classList.add("invalid");
+                lowercaseRequirement.classList.remove("valid");
+            }
+
+            // Número
+            if (hasDigit) {
+                digitRequirement.classList.add("valid");
+                digitRequirement.classList.remove("invalid");
+            } else {
+                digitRequirement.classList.add("invalid");
+                digitRequirement.classList.remove("valid");
+            }
+
+            // Carácter especial
+            if (hasSpecialChar) {
+                specialCharRequirement.classList.add("valid");
+                specialCharRequirement.classList.remove("invalid");
+            } else {
+                specialCharRequirement.classList.add("invalid");
+                specialCharRequirement.classList.remove("valid");
+            }
+        });
+
+        // Mostrar mensaje de coincidencia de contraseñas solo cuando el campo está enfocado
+        confirmPasswordInput.addEventListener("focus", function () {
+            passwordMatchMessage.style.display = "block"; // Mostrar el mensaje cuando el campo recibe foco
+
+            // Actualizar el mensaje de coincidencia de contraseñas al recibir el foco
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                passwordMatchMessage.textContent = "Las contraseñas no coinciden";
+                passwordMatchMessage.classList.remove("password-match");
+                passwordMatchMessage.classList.add("password-mismatch");
+            } else {
+                passwordMatchMessage.textContent = "Las contraseñas coinciden";
+                passwordMatchMessage.classList.remove("password-mismatch");
+                passwordMatchMessage.classList.add("password-match");
+            }
+        });
+
+        // Ocultar el mensaje de coincidencia de contraseñas cuando el campo pierde el foco
+        confirmPasswordInput.addEventListener("blur", function () {
+            passwordMatchMessage.style.display = "none"; // Ocultar el mensaje cuando el campo pierde foco
+        });
+
+        // Validación en tiempo real de las contraseñas mientras el usuario escribe
+        confirmPasswordInput.addEventListener("input", function () {
+            if (confirmPasswordInput.value !== passwordInput.value) {
+                passwordMatchMessage.textContent = "Las contraseñas no coinciden";
+                passwordMatchMessage.classList.remove("password-match");
+                passwordMatchMessage.classList.add("password-mismatch");
+            } else {
+                passwordMatchMessage.textContent = "Las contraseñas coinciden";
+                passwordMatchMessage.classList.remove("password-mismatch");
+                passwordMatchMessage.classList.add("password-match");
+            }
+        });
+
+        // Prevenir copiar y pegar en los campos de contraseña
+        passwordInput.addEventListener("copy", function (event) {
+            event.preventDefault(); // Evita la acción de copiar
+        });
+
+        confirmPasswordInput.addEventListener("copy", function (event) {
+            event.preventDefault(); // Evita la acción de copiar
+        });
+
+        passwordInput.addEventListener("paste", function (event) {
+            event.preventDefault(); // Evita la acción de pegar
+        });
+
+        confirmPasswordInput.addEventListener("paste", function (event) {
+            event.preventDefault(); // Evita la acción de pegar
+        });
+
+        identityInput.addEventListener("paste", function (event) {
+            event.preventDefault(); // Evita la acción de pegar
+        });
+
+        window.onbeforeunload = function () {
+            // Establece la posición de desplazamiento antes de que la página se recargue
+            window.scrollTo(0, 0); // Esto asegura que la página siempre comience desde la parte superior al recargarse
+        };
+
+        // Validación en tiempo real del campo de identidad (formateo con guiones)
+        identityInput.addEventListener("input", function () {
+            let value = this.value.replace(/[^0-9]/g, ""); // Elimina todo lo que no sean números
+            if (value.length <= 4) {
+                this.value = value;
+            } else if (value.length <= 8) {
+                this.value = value.substring(0, 4) + "-" + value.substring(4);
+            } else if (value.length <= 13) {
+                this.value =
+                    value.substring(0, 4) +
+                    "-" +
+                    value.substring(4, 8) +
+                    "-" +
+                    value.substring(8);
+            } else {
+                this.value =
+                    value.substring(0, 4) +
+                    "-" +
+                    value.substring(4, 8) +
+                    "-" +
+                    value.substring(8, 13);
+            }
+        });
+
+        // Validación del formulario al hacer clic en el botón de registrarse
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            let valid = true;
+
+            // Validación de la contraseña
+            const password = passwordInput.value;
+            const minLength = 8;
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasDigit = /\d/.test(password);
+            const hasSpecialChar = /[^\w\s]/.test(password);
+
+            if (
+                password.length < minLength ||
+                !hasUpperCase ||
+                !hasLowerCase ||
+                !hasDigit ||
+                !hasSpecialChar
+            ) {
+                passwordInput.focus(); // Mueve el cursor al campo de contraseña si no cumple los requisitos
+                valid = false;
+            }
+
+            // Validación de la confirmación de la contraseña
+            if (confirmPasswordInput.value !== password) {
+                confirmPasswordInput.focus(); // Mueve el cursor al campo de confirmación de contraseña si no coinciden
+                valid = false;
+            }
+
+            // Si algún campo es inválido, se evita el envío del formulario
+            if (!valid) {
+                event.preventDefault(); // Evita el envío del formulario
+            }
+        });
+
+        // VALIDACIÓN CON EL BACKEND
+        const registerButton = document.getElementById("registerButton");
+
+        let codEmpleado = null;
+
+        // Verificación de la existencia del número de identidad en la base de datos
+        identityInput.addEventListener("input", function () {
+            const identityNumber = identityInput.value;
+
+            if (identityNumber.length === 15) { // Verificar si tiene el tamaño adecuado (con guiones)
+                fetch(`http://localhost:3000/existencia_empl/${identityNumber}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (!data) {
+                            identityMessage.textContent = "El número de identidad no existe";
+                            identityMessage.style.color = "red";
+                            identityMessage.style.display = "block";
+                        } else {
+                            codEmpleado = data.cod_empleado
+                            // Continuar con la verificación del nombre de usuario
+                            verifyUserExists(data.cod_empleado, identityNumber);
+                        }
+                    })
+                    .catch((error) => console.error(error));
+            } else {
+                identityMessage.textContent = "Ingresa un número de identidad válido";
+                identityMessage.style.color = "orange";
+                identityMessage.style.display = "block";
+                nameMessage.style.display = "none";
+                userMessage.style.display = "none";
+
+                document.getElementById("nombres").value = "";
+                document.getElementById("apellidos").value = "";
+                document.getElementById("usuario").value = "";
+                document.getElementById("registerButton").disabled = true;
+            }
+        });
+
+
+        // Verificación de la existencia del nombre de usuario
+        function verifyUserExists(cod_empleado, dni_empleado) {
+            fetch(`http://localhost:3000/existencia_usua/${cod_empleado}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data) {
+                        identityMessage.textContent = "Este número de identidad ya cuenta con un usuario";
+                        identityMessage.style.color = "red";
+                        identityMessage.style.display = "block";
+                    } else {
+                        identityMessage.textContent = "";
+                        enableRegistrationForm(dni_empleado);
+                    }
+                })
+                .catch((error) => console.error(error));
+        }
+
+
+        // Habilitar el botón de registrarme y llenar los campos de nombres y apellidos
+        function enableRegistrationForm(dni_empleado) {
+            fetch(`http://localhost:3000/existencia_empl/${dni_empleado}`)
+                .then((response) => response.json())
+                .then((data) => {
+                    const { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido } = data;
+                    document.getElementById("nombres").value = `${primer_nombre} ${segundo_nombre}`;
+                    document.getElementById("apellidos").value = `${primer_apellido} ${segundo_apellido}`;
+                    generateUsername(primer_nombre, primer_apellido)
+                        .then(username => {
+                            document.getElementById("usuario").value = username;  // Asignamos el valor al campo de input
+                        })
+                        .catch(error => {
+                            console.error("Error al generar el nombre de usuario:", error);
+                        });
+                    document.getElementById("registerButton").disabled = false;
+
+                    nameMessage.textContent = "*Si su número de identidad no coincide con sus nombres y apellidos por favor contacte a soporte.";
+                    nameMessage.style.color = "blue";
+                    nameMessage.style.display = "block";
+
+                    userMessage.textContent = "*Recuerda tu nombre de usuario para poder iniciar sesión.";
+                    userMessage.style.color = "blue";
+                    userMessage.style.display = "block";
+                })
+                .catch((error) => console.error(error));
+        }
+
+
+        // Generar un nombre de usuario único
+        function generateUsername(primer_nombre, primer_apellido) {
+            let username = `${primer_nombre.charAt(0).toUpperCase()}${primer_apellido.toUpperCase()}`;
+            let randomNum = Math.floor(100 + Math.random() * 900); // Número aleatorio de 3 dígitos
+            username = username + randomNum;
+
+            // Devolver una promesa para que el flujo sea controlado correctamente
+            return new Promise((resolve, reject) => {
+                fetch(`http://localhost:3000/existencia_nomb_usua`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        let usernameExists = data.some(user => user.nomb_usuario === username);
+                        if (usernameExists) {
+                            // Si el nombre de usuario ya existe, volvemos a llamar la función de forma recursiva
+                            resolve(generateUsername(primer_nombre, primer_apellido)); // Recursión con promesa
+                        } else {
+                            resolve(username); // Si no existe, devolver el nombre de usuario
+                        }
+                    })
+                    .catch((error) => reject(error)); // Manejo de errores en la solicitud
+            });
+        }
+
+
+
+
+
+        // Enviar la información al servidor
+        document.getElementById("registrationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const data = {
+                nomb_usuario: document.getElementById("usuario").value,
+                contraseña: document.getElementById("password").value, // Encriptar contraseña
+                cod_empleado: codEmpleado,  // Usamos el cod_empleado que obtuvimos antes
+                id_estado_usuario: 1, // Siempre 1
+                correo: document.getElementById("email").value
+            };
+
+            fetch('http://localhost:3000/crear_usua', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Usuario creado:', data);
+
+                    // Crear el mensaje de éxito flotante
+                    const successMessage = document.createElement("div");
+                    successMessage.textContent = "¡Usuario creado exitosamente!";
+
+                    // Agregar la clase "toast-message" del archivo CSS
+                    successMessage.classList.add("toast-message");
+
+                    document.body.appendChild(successMessage);
+
+                    // Desaparecer el mensaje después de 3 segundos
+                    setTimeout(function () {
+                        successMessage.style.opacity = "0";  // Desvanecer el mensaje
+                        setTimeout(function () {
+                            successMessage.remove();  // Eliminar el mensaje del DOM
+                        }, 500);  // Esperar el tiempo de la transición antes de eliminar
+
+                        // Redirigir a otra página después de que el mensaje desaparezca
+                        window.location.href = "login.html"; // Redirigir a la página de login
+                    }, 3000);  // El mensaje desaparecerá después de 3 segundos
+                })
+                .catch((error) => console.error('Error:', error));
+        });
+
+        
+    </script>
 </body>
 
 </html>
