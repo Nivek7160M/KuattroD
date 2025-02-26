@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Empleados</title>
+    <link rel="stylesheet" href="public/css/styles.css">
+    <link rel="stylesheet" href="public/css/empleado.css"> 
+</head>
+
+<body>
+
+    <!-- Encabezado con logo -->
+    <header class="navbar">
+        <div class="navbar-container">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="inicio.html" class="nav-logo">
+                <img src="https://kuattro.hn/wp-content/uploads/2019/03/Logo_Kuattro_VFinal_Flat-1.png" alt="Logo" class="nav-logo-img">
+            </a>
+            <input type="text" class="search-bar" placeholder="Buscar...">
+            <div class="user-menu">
+                <button class="user-button" onclick="toggleUserMenu()">👤</button>
+                <div class="user-dropdown" id="userDropdown">
+                    <a href="perfil.html">Perfil</a>
+                    <a href="cambiarcontraseña.html">Cambiar contraseña</a>
+                    <a href="login.html">Cerrar Sesión</a>
+                </div>
+            </div>    
+        </div>
+    </header>
+
+    <!-- Menú lateral -->
+    <aside class="side-menu" id="sideMenu">
+        <nav>
+            <ul>
+                <li><a href="Solicitudes.html">Solicitudes</a></li>
+                <li><a href="nosotros.html">Nosotros</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Contenido Principal -->
+    <main class="main-content">
+        <div class="table-container">
+            <h2>Listado de Empleados</h2>
+            <button class="btn-create" onclick="window.location.href='CrearUsuari.html'">Crear Empleado</button>
+            <table class="employee-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>DNI</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th>Fecha de Contratación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Juan Pérez</td>
+                        <td>1234-5678-90123</td>
+                        <td>1995-05-20</td>
+                        <td>2022-06-15</td>
+                        <td>
+                            <button class="btn-edit">Editar</button>
+                            <button class="btn-delete">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>María López</td>
+                        <td>9876-5432-10987</td>
+                        <td>1990-08-12</td>
+                        <td>2021-04-10</td>
+                        <td>
+                            <button class="btn-edit">Editar</button>
+                            <button class="btn-delete">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+
+    <script>
+        function toggleMenu() {
+            const sideMenu = document.getElementById('sideMenu');
+            const mainContent = document.getElementById('mainContent');
+            sideMenu.classList.toggle('open');
+            mainContent.classList.toggle('shifted');
+        }
+        function toggleUserMenu() {
+            const userDropdown = document.getElementById('userDropdown');
+            userDropdown.classList.toggle('show');
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-button')) {
+                const dropdowns = document.getElementsByClassName('user-dropdown');
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+        function filterUsers() {
+            const input = document.getElementById('searchBar');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('userTable');
+            const tr = table.getElementsByTagName('tr');
+
+            for (let i = 0; i < tr.length; i++) {
+                const td = tr[i].getElementsByTagName('td');
+                let found = false;
+                for (let j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        if (td[j].innerText.toLowerCase().indexOf(filter) > -1) {
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+                tr[i].style.display = found ? '' : 'none';
+            }
+        }
+    </script>
+
+
+
+
+    <!-- Pie de página común -->
+    <footer class="footer">
+        <p>&copy; Kuattro Distribuciones. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+
+</html>
