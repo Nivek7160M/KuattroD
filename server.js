@@ -163,14 +163,16 @@ app.post('/recuperar-password', (req, res) => {
                 return res.status(500).json({ mensaje: 'Error en el servidor' });
             }
 
-            const mailOptions = {
+           const mailOptions = {
                 from: 'kuattrodistribuciones@gmail.com',
                 to: email,
                 subject: 'Código OTP para Recuperación de Contraseña',
                 text: `Hola, 
 Tu código OTP para recuperar tu contraseña es: ${otp}.
-Si no solicitaste este código, ignora este correo.`,
-                html: `<p>Hola,</p><p>Tu código OTP es: <strong>${otp}</strong>.</p>`
+Si no solicitaste este código, ignora este correo.
+[KuattrioDistribuciones]`,
+                html: `<p>Hola,</p><p>Tu código OTP para recuperar la contraseña es: <strong>${otp}</strong>.</p><p>Si no solicitaste este código, ignora este correo.<p><br><p>[KuattroDistribuciones]<p>`
+
             };
 
             transporter.sendMail(mailOptions, (error, info) => {
