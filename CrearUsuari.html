@@ -64,6 +64,9 @@
 
                 <label for="fecha_contratacion">Fecha de Contratación:</label>
                 <input type="date" id="fecha_contratacion" name="fecha_contratacion" required>
+                
+                <label for="cod_empleado">Codigo de empleado:</label>
+                <input type="int" id="cod_empleado" name="cod_empleado" required>
 
                 <button type="submit">Crear Empleado</button>
             </form>
@@ -81,7 +84,8 @@
                 segundo_apellido: document.getElementById('segundo_apellido').value,
                 dni_empleado: document.getElementById('dni_empleado').value,
                 fecha_nacimiento: document.getElementById('fecha_nacimiento').value,
-                fecha_contratacion: document.getElementById('fecha_contratacion').value
+                fecha_contratacion: document.getElementById('fecha_contratacion').value,
+                 cod_empleado: document.getElementById('cod_empleado').value
             };
 
             try {
@@ -147,6 +151,26 @@
                 tr[i].style.display = found ? '' : 'none';
             }
         }
+
+// Selecciona el input del DNI
+const dniInput = document.getElementById('dni_empleado');
+
+// Función para formatear el DNI
+dniInput.addEventListener('input', function() {
+    // Elimina todos los caracteres que no sean números
+    let dni = this.value.replace(/\D/g, '');
+    
+    // Aplica el formato 0000-0000-00000
+    if (dni.length > 4 && dni.length <= 8) {
+        dni = dni.replace(/(\d{4})(\d+)/, '$1-$2');
+    } else if (dni.length > 8) {
+        dni = dni.replace(/(\d{4})(\d{4})(\d+)/, '$1-$2-$3');
+    }
+    
+    // Actualiza el valor del input
+    this.value = dni;
+});
+        
     </script>
 
 
