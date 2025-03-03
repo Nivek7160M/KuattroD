@@ -10,14 +10,15 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background: linear-gradient(135deg, #147d17, #085696); /*<---------- aqui se cambia el color del fondo*/
+    background: linear-gradient(135deg, #147d17, #085696);
+    /*<---------- aqui se cambia el color del fondo*/
     font-family: Arial, sans-serif;
     padding: 0;
 }
 
 /* Barra de navegación superior */
 .navbar {
-    background-color: #e0e0e0;    
+    background-color: #e0e0e0;
     color: white;
     width: 100%;
     padding: 15px 20px;
@@ -47,14 +48,17 @@ body {
 .main-content {
     flex-grow: 1;
     padding: 20px;
-    margin-top: 60px; /* Ajusta según la altura de tu navbar */
+    margin-top: 60px;
+    /* Ajusta según la altura de tu navbar */
     transition: margin-left 0.3s;
 }
 
 /* Footer */
 .footer {
-    background-color: #1c1c1c;   /*<---------- aqui se cambia el color del fondo del footer*/
-    color: white;   /*<---------- aqui se cambia el color de las letras */
+    background-color: #1c1c1c;
+    /*<---------- aqui se cambia el color del fondo del footer*/
+    color: white;
+    /*<---------- aqui se cambia el color de las letras */
     text-align: center;
     padding: 10px 20px;
     position: relative;
@@ -80,7 +84,7 @@ form {
     background-color: #f9f9f9;
 }
 
-form h2{
+form h2 {
     text-align: center;
     margin-bottom: 10px;
 }
@@ -92,9 +96,11 @@ label {
     font-size: 16px;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"],
+input[type="email"] {
     width: 100%;
     padding: 12px;
+    margin-top: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
@@ -118,8 +124,10 @@ button:hover {
 }
 
 button:disabled {
-    cursor: not-allowed; /* Cambia el puntero a no permitido cuando el botón está deshabilitado */
-    background-color: #ddd; /* Cambia el color de fondo cuando está deshabilitado */
+    cursor: not-allowed;
+    /* Cambia el puntero a no permitido cuando el botón está deshabilitado */
+    background-color: #ddd;
+    /* Cambia el color de fondo cuando está deshabilitado */
 }
 
 /* Estilos para los mensajes */
@@ -148,7 +156,9 @@ button:disabled {
 }
 
 /* Estilo para los mensajes de div*/
-#identityMessage, #nameMessage, #userMessage {
+#identityMessage,
+#nameMessage,
+#userMessage {
     display: none;
     font-size: 0.8em;
     margin-top: 5px;
@@ -160,14 +170,23 @@ button:disabled {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #167bff;  /* Verde */
+    background-color: #167bff;
     color: white;
-    padding: 15px 30px;
+    padding: 15px 15px;
     border-radius: 5px;
     font-size: 16px;
     z-index: 9999;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: opacity 0.5s ease-out;  /* Transición suave para desvanecerse */
+    transition: opacity 0.5s ease-out; /* Transición suave para desvanecerse */
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: flex-start; /* Alinea los elementos desde la izquierda */
+    z-index: 9999;
+}
+
+.toast-message img {
+    margin-right: 5px; /* Espacio entre la imagen y el texto */
+    width: 24px; /* Ajustar el tamaño de la imagen */
 }
 
 /* Estilo para el mensaje de coincidencia de contraseñas */
@@ -184,16 +203,54 @@ button:disabled {
     color: orange;
 }
 
-#yaRegistrado {
+form p {
     display: block;
     text-align: center;
     margin-top: 20px;
-    color: #007bff; /* Color azul para el enlace */
     font-size: 14px;
-    text-decoration: none; /* Elimina el subrayado por defecto */
+}
+
+#yaRegistrado {
+    color: #0073ef;
+    /* Color azul para el enlace */
+    text-decoration: none;
+    /* Elimina el subrayado por defecto */
 }
 
 #yaRegistrado:hover {
-    color: #0056b3; /* Color más oscuro cuando el enlace es hover */
-    text-decoration: underline; /* Subraya el enlace cuando el usuario pasa el cursor sobre él */
+    color: #0056b3;
+    /* Color más oscuro cuando el enlace es hover */
+    text-decoration: underline;
+    /* Subraya el enlace cuando el usuario pasa el cursor sobre él */
+}
+
+.password-container {
+    position: relative;
+}
+
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    padding-right: 50px;
+    /* Espacio para el icono */
+    box-sizing: border-box;
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Icono de mostrar/ocultar contraseña */
+.eye-icon {
+    position: absolute;
+    top: 68%;
+    right: 16px;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.eye-icon img {
+    width: 20px;
+    /* Tamaño del icono */
+    height: 20px;
 }
