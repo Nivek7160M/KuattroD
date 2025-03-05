@@ -21,7 +21,7 @@
 
     <!-- Todo lo que vayan a agregar -->
     <main class="main-content">
-        <form id="registrationForm">
+        <form id="registrationForm" autocomplete="off">
             <h2>Registrarse</h2>
             <hr />
 
@@ -100,6 +100,7 @@
         const eyeImage1 = document.getElementById("eyeImage1");
         const eyeIcon2 = document.getElementById("eyeIcon2");
         const eyeImage2 = document.getElementById("eyeImage2");
+        const formulario = document.getElementById('registrationForm');
 
         // Cambiar tipo y imagen para la contraseña principal
         eyeIcon1.addEventListener("click", function () {
@@ -317,7 +318,7 @@
                         identityMessage.style.color = "red";
                         identityMessage.style.display = "block";
                     } else {
-                        identityMessage.textContent = "";
+                        identityMessage.style.display = "none";
                         enableRegistrationForm(dni_empleado);
                     }
                 })
@@ -333,6 +334,7 @@
                     const { primer_nombre, segundo_nombre, primer_apellido, segundo_apellido } = data;
                     document.getElementById("nombres").value = `${primer_nombre} ${segundo_nombre}`;
                     document.getElementById("apellidos").value = `${primer_apellido} ${segundo_apellido}`;
+                    document.getElementById("usuario").value = `${primer_nombre.charAt(0)}${primer_apellido.toUpperCase()}`;
 
                     nameMessage.textContent = "*Si su número de identidad no coincide con sus nombres y apellidos por favor contacte a soporte.";
                     nameMessage.style.color = "blue";
@@ -343,7 +345,12 @@
 
 
         // Verificar si el nombre de usuario ya existe
-        userInput.addEventListener("input", function () {
+        // Asociar la misma función a los eventos 'focus' e 'input'
+        userInput.addEventListener("input", handleInputFocus);  // Cuando el usuario empieza a escribir
+        userInput.addEventListener("focus", handleInputFocus);  // Cuando el campo recibe el foco
+
+        // Función que se ejecuta tanto cuando el campo nombre de usuario recibe el foco o cuando se escribe
+        function handleInputFocus() {
             let usuario = userInput.value;
 
             // Eliminar caracteres no alfabéticos y convertir a mayúsculas
@@ -351,7 +358,7 @@
             userInput.value = usuario;
 
             // Validación del nombre de usuario
-            if (usuario.length >= 5) {
+            if (usuario.length > 4) {
 
                 fetch(`http://localhost:3000/existencia_nomb_usua`)
                     .then((response) => response.json())
@@ -375,11 +382,11 @@
                 userMessage.style.color = "red";
                 userMessage.style.display = "block";
             }
-        });
+        };
 
 
         // Enviar la información al servidor
-        document.getElementById('registrationForm').addEventListener('submit', function (event) {
+        formulario.addEventListener('submit', function (event) {
             let valid = true;
 
             // Validación de la contraseña
@@ -460,7 +467,7 @@
                         setTimeout(function () {
                             successMessage.remove();  // Eliminar el mensaje del DOM
                         }, 500);  // Esperar el tiempo de la transición antes de eliminar
-
+                        
                         // Redirigir a otra página después de que el mensaje desaparezca
                         window.location.href = "login.html"; // Redirigir a la página de login
                     }, 2500);  // El mensaje desaparecerá después de 2.5 segundos
