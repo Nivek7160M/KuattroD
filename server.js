@@ -324,6 +324,63 @@ app.get('/usuarios', (req, res) => {
 });
 
 
+app.get('/usuario/:id', (req, res) => {
+    const  id  = req.params.id;
+
+    db.execute(`SELECT nomb_usuario, email FROM tbl_usuario  WHERE Id_Usuario = ?`,[id], (err, results) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send(err);
+        } else {
+            res.json(results); // Devuelve los datos de usuario con información del empleado
+        }
+    });
+});
+// Actualizar un usuario
+app.put('/actualizar_usuario/:id', (req, res) => {
+    const id = req.params.id;
+    const { usuario2, email2 } = req.body;
+
+    if (!usuario2 || !email2) {
+        return res.status(400).json({ mensaje: 'Todos los campos son obligatorios' });
+    }
+
+    console.log("ID del usuario a editar:", id);
+    const query = 'UPDATE tbl_usuario SET nomb_usuario = ?, email = ? WHERE tbl_usuario.Id_Usuario = ?';
+    db.query(query, [usuario2, email2, id], (err, result) => {
+        if (err) {
+            console.error('❌ Error al actualizar usuario:', err);
+            return res.status(500).json({ mensaje: 'Error en el servidor' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        return res.json({ mensaje: 'Usuario actualizado exitosamente' });
+    });
+});
+
+
+
+// Eliminar un usuario
+app.delete('/eliminar_usuario/:id', (req, res) => {
+    const  id  = req.params.id;
+    db.execute('DELETE FROM tbl_usuario WHERE Id_Usuario = ?', [id], (err, result) => {
+        if (err) {
+            console.error('❌ Error al eliminar usuario:', err);
+            return res.status(500).json({ mensaje: 'Error en el servidor' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ mensaje: 'Usuario no encontrado' });
+        }
+
+        return res.json({ mensaje: 'Usuario eliminado exitosamente' });
+    });
+});
+
+
 // Iniciar el servidor
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
